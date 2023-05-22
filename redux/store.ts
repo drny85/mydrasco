@@ -6,6 +6,7 @@ import home5GSlide from './home5GSlide';
 
 import themeSlide from './themeSlide';
 import wirelessSlide from './wirelessSlide';
+import quotesSlide from './quotesSlide';
 // ...
 
 export const store = configureStore({
@@ -16,6 +17,7 @@ export const store = configureStore({
         fiosData: fiosData,
         wireless: wirelessSlide,
         home5G: home5GSlide,
+        quotes: quotesSlide,
     },
 });
 
