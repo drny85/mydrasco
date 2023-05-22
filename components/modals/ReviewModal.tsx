@@ -1,10 +1,7 @@
-import * as React from 'react';
-import Backdrop from '@mui/material/Backdrop';
 import Box from '@mui/material/Box';
-import Modal from '@mui/material/Modal';
-import Fade from '@mui/material/Fade';
 import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
+import Fade from '@mui/material/Fade';
+import Modal from '@mui/material/Modal';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks/reduxHooks';
 import { setReviewModal } from '../../redux/wirelessSlide';
 import TotalView from '../TotalView';
@@ -15,9 +12,9 @@ const style = {
     left: '50%',
     transform: 'translate(-50%, -50%)',
     bgcolor: 'background.paper',
-    boxShadow: 24,
+    boxShadow: 18,
 
-    p: 4,
+    p: 3,
 };
 
 const ReviewModal = () => {
@@ -34,8 +31,9 @@ const ReviewModal = () => {
                 <Fade in={open}>
                     <Box
                         width={{ xs: '90%', md: '70%' }}
-                        height={{ xs: '90%', md: '80%' }}
+                        //height={{ xs: '90%', md: '80%' }}
                         maxWidth={'880px'}
+                        maxHeight={{ xs: '90%', md: '85%' }}
                         overflow={'auto'}
                         borderRadius={2}
                         sx={{
@@ -92,6 +90,7 @@ const ReviewModal = () => {
                                                         '0px 0px 5px #ccc',
                                                 }}
                                                 p={2}
+                                                borderRadius={2}
                                                 key={line.id}
                                             >
                                                 <Box
@@ -109,7 +108,7 @@ const ReviewModal = () => {
 
                                                     <h3>${line.price}</h3>
                                                 </Box>
-                                                <Box p={4}>
+                                                <Box p={1}>
                                                     {line.perks
                                                         .filter(
                                                             (perk) =>
@@ -174,7 +173,7 @@ const ReviewModal = () => {
                             </div>
                             <div
                                 style={{
-                                    flex: 0.3,
+                                    // flex: 0.3,
                                     width: '100%',
                                     display: 'flex',
                                     flexDirection: 'column',
@@ -186,6 +185,15 @@ const ReviewModal = () => {
                                 </Box>
                             </div>
                         </div>
+                        <Box
+                            justifyContent={'center'}
+                            mt={2}
+                            display={'flex'}
+                            alignItems={'center'}
+                            width={'100%'}
+                        >
+                            <Button variant="contained">Save Quote</Button>
+                        </Box>
                     </Box>
                 </Fade>
             </Modal>

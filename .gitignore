@@ -9,9 +9,11 @@ npm-debug.*
 *.mobileprovision
 *.orig.*
 web-build/
+.next
 
 # macOS
 .DS_Store
 .env
+.env.local
 firebase-debug.log
 yarn-error.log
