@@ -46,9 +46,10 @@ const MyPlan = () => {
 
     const removeAllPerks = () => {
         const newLines = lines.map((line) => {
+            const l = { ...line, perks: [...perks] };
             return {
                 ...line,
-                price: calculatePrice(line),
+                price: calculatePrice(l),
                 perks: [...perks],
             };
         });
@@ -282,7 +283,7 @@ const MyPlan = () => {
             <div
                 style={{
                     backgroundColor: theme.BACKGROUND_COLOR,
-                    margin: '0 auto',
+                    margin: '2rem auto',
                     width: '100%',
                     maxWidth: '880px',
                     marginBottom: '2rem',

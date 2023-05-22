@@ -60,6 +60,16 @@ const TotalView = ({ lines, modalView = false }: Props) => {
             )
             .reduce((acc, line) => acc + line.discount, 0);
     };
+    const perksSavings = (): number => {
+        return lines
+            .map((line) =>
+                line.perks.map((perk) =>
+                    perk.selected ? perk.value - perk.price : 0
+                )
+            )
+            .flat()
+            .reduce((acc, perks) => acc + perks, 0);
+    };
 
     const perks = (): Perk[] => {
         //@ts-ignore
@@ -187,7 +197,8 @@ const TotalView = ({ lines, modalView = false }: Props) => {
                                         marginLeft: '5px',
                                     }}
                                 >
-                                    (included in sub-total)
+                                    (${perksSavings().toFixed(2)}/mo savings in
+                                    perks)
                                 </span>
                             </p>
                             <p
@@ -360,8 +371,7 @@ const TotalView = ({ lines, modalView = false }: Props) => {
                             firstResponderDiscount(
                                 lines.length,
                                 expressFirstResponder
-                            ) +
-                            perksTotal()
+                            )
                         }
                     />
                 </p>

@@ -16,7 +16,7 @@ export const perks: Perk[] = [
         name: 'apple one',
         price: 10,
         sharabled: false,
-        value: 16.99,
+        value: 16.95,
         selected: false,
         description:
             'Apple One bundles together Apple Music®, Apple TV+®, Apple Arcade®, and iCloud+℠ with up to 200 GB of storage. Plus, it’s all ad-free. \n Apple One is available as an Individual or Family subscription through Verizon.',
