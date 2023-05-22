@@ -154,10 +154,6 @@ const TotalView = ({ lines, modalView = false }: Props) => {
                         formatValue={(n: number) => n.toFixed(0)}
                         value={
                             lines.reduce((acc, line) => acc + line.price, 0) +
-                            firstResponderDiscount(
-                                lines.length,
-                                expressFirstResponder
-                            ) +
                             mobilePlusHomeDiscount() +
                             autoPayDiscount() +
                             perksTotal() +
