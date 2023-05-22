@@ -292,35 +292,12 @@ const MyPlan = () => {
                 style={{
                     backgroundColor: theme.BACKGROUND_COLOR,
                     margin: '0 auto',
-                    width: '100vw',
+                    width: '100%',
                     maxWidth: '880px',
-
                     marginBottom: '2rem',
                 }}
             >
                 <AnimateElementIf show={lines.length > 0}>
-                    <Box
-                        display={'flex'}
-                        justifyContent={'space-between'}
-                        alignItems={'center'}
-                    >
-                        <Button
-                            variant="text"
-                            onClick={() => {
-                                setGetStarted(!getStarted);
-                            }}
-                        >
-                            Go Back
-                        </Button>
-                        <h2
-                            style={{
-                                margin: '0.8rem auto',
-                                textAlign: 'center',
-                            }}
-                        >
-                            My Plan
-                        </h2>
-                    </Box>
                     <TopSwicher />
                 </AnimateElementIf>
 
@@ -494,8 +471,8 @@ const MyPlan = () => {
                                 alignItems: 'center',
                                 flexDirection: 'column',
                                 margin: '0 auto',
-                                height: '100%',
                                 width: '100%',
+                                height: '100%',
                             }}
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
@@ -510,6 +487,7 @@ const MyPlan = () => {
                                         }} // Initial position of the element
                                         animate={{
                                             opacity: 1,
+
                                             y: lines.length > 0 ? 0 : '30vh',
                                         }} // Final position of the element (center of the screen)
                                         transition={{
@@ -569,7 +547,7 @@ const MyPlan = () => {
                                                             'Unlimited Plus'
                                                         )
                                                     }
-                                                    color="warning"
+                                                    color="success"
                                                     variant="text"
                                                 >
                                                     Switch To Unlimited PLus
@@ -645,6 +623,7 @@ const MyPlan = () => {
                     }}
                 />
             </div>
+            <div style={{ height: '100px' }}></div>
         </MainContainer>
     );
 };

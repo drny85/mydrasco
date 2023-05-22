@@ -12,13 +12,15 @@ const GlobalStyle = createGlobalStyle<Props>`
     margin: 0;
     padding:0;
     outline:none;
+   
 
 }
 body: {
     font-size: calc(14px + .5vm);
     font-family: 'Raleway', Roboto, sans-serif;
-    width: 100vw;
-    height: 100vh;
+    min-width: 100vw;
+    min-height: 100vh;
+    overflow:'scroll';
    
 }
 a {
