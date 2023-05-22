@@ -294,8 +294,8 @@ const MyPlan = () => {
                     margin: '0 auto',
                     width: '100vw',
                     maxWidth: '880px',
-                    position: 'relative',
-                    height: '100%',
+
+                    marginBottom: '2rem',
                 }}
             >
                 <AnimateElementIf show={lines.length > 0}>
@@ -616,7 +616,10 @@ const MyPlan = () => {
                             <AnimatePresence>
                                 {lines.length > 0 && (
                                     <motion.div
-                                        style={{ width: '100%' }}
+                                        style={{
+                                            width: '100%',
+                                            marginBottom: '2rem',
+                                        }}
                                         initial={{ opacity: 0 }}
                                         animate={{ opacity: 1 }}
                                     >
@@ -627,21 +630,21 @@ const MyPlan = () => {
                         </motion.div>
                     )}
                 </AnimatePresence>
+
+                <ReviewModal />
+                <PerkAlertModal
+                    open={showPerkAlertModal}
+                    onClose={() => setShowPerkAlertModal(false)}
+                    perk={perkToAdd?.perK!}
+                    onSubmitted={() => {
+                        if (!perkToAdd) return;
+
+                        addPerk(perkToAdd.line, perkToAdd.perK);
+                        setShowPerkAlertModal(false);
+                        //setPerkToAdd(undefined);
+                    }}
+                />
             </div>
-
-            <ReviewModal />
-            <PerkAlertModal
-                open={showPerkAlertModal}
-                onClose={() => setShowPerkAlertModal(false)}
-                perk={perkToAdd?.perK!}
-                onSubmitted={() => {
-                    if (!perkToAdd) return;
-
-                    addPerk(perkToAdd.line, perkToAdd.perK);
-                    setShowPerkAlertModal(false);
-                    //setPerkToAdd(undefined);
-                }}
-            />
         </MainContainer>
     );
 };

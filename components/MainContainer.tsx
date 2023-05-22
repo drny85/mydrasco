@@ -1,4 +1,4 @@
-import { Fab } from '@mui/material';
+import { Fab, Hidden } from '@mui/material';
 import React, { FC } from 'react';
 import { useAppDispatch, useAppSelector } from '../redux/hooks/reduxHooks';
 import DarkModeIcon from '@mui/icons-material/DarkMode';
@@ -43,7 +43,7 @@ const MainContainer: FC<PageProps> = ({ children, title }) => {
                 {children}
                 <footer style={{ display: 'flex' }}>
                     {user && (
-                        <>
+                        <div>
                             {' '}
                             <Fab
                                 onClick={() =>
@@ -92,7 +92,7 @@ const MainContainer: FC<PageProps> = ({ children, title }) => {
                             >
                                 <ExitToAppIcon color="primary" />
                             </Fab>
-                        </>
+                        </div>
                     )}
                 </footer>
             </div>
