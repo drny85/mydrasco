@@ -223,7 +223,7 @@ const MyPlan = () => {
                             : lines.length === 4
                             ? 40
                             : lines.length >= 5
-                            ? 40
+                            ? 37
                             : 0) -
                         expressAutoPay -
                         mobilePlusHome(line) -
@@ -241,7 +241,7 @@ const MyPlan = () => {
                             : lines.length === 4
                             ? 55
                             : lines.length >= 5
-                            ? 55
+                            ? 52
                             : 0) -
                         expressAutoPay -
                         mobilePlusHome(line) -
