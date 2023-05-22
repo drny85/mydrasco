@@ -23,7 +23,7 @@ import { NON_PREMIUM_BYOD_VALUE, PREMIUM_BYOD_VALUE } from '../constant';
 
 const MyPlan = () => {
     const theme = useAppSelector((state) => state.theme);
-    const [unlimitedPlus, setUnlimitedPlus] = React.useState(95);
+    const [unlimitedPlus, setUnlimitedPlus] = React.useState(90);
     const [unlimitedWelcome, setUnlimitedWelcome] = React.useState(75);
     const [getStarted, setGetStarted] = React.useState(false);
     const [showPerkAlertModal, setShowPerkAlertModal] = React.useState(false);
@@ -277,15 +277,6 @@ const MyPlan = () => {
         expressHasFios,
     ]);
 
-    useEffect(() => {
-        if (expressAutoPay === 0) {
-            setUnlimitedPlus(95);
-            setUnlimitedWelcome(75);
-        } else if (expressAutoPay === 10) {
-            setUnlimitedPlus(85);
-            setUnlimitedWelcome(65);
-        }
-    }, [expressAutoPay]);
     return (
         <MainContainer>
             <div
@@ -335,7 +326,7 @@ const MyPlan = () => {
                                             dispatch(toogleHoverPlan('plus'))
                                         }
                                         title="Unlimited Plus"
-                                        price={unlimitedPlus}
+                                        price={unlimitedPlus - expressAutoPay}
                                         description="Our reliable, fastest 5G, up to 10x faster than 4G LTE. No matter how much you use."
                                     />
 
@@ -345,7 +336,9 @@ const MyPlan = () => {
                                             dispatch(toogleHoverPlan('welcome'))
                                         }
                                         title="Unlimited Welcome"
-                                        price={unlimitedWelcome}
+                                        price={
+                                            unlimitedWelcome - expressAutoPay
+                                        }
                                         description="Our reliable, fast 5G."
                                     />
                                 </Grid>
@@ -478,6 +471,14 @@ const MyPlan = () => {
                             animate={{ opacity: 1 }}
                             exit={{ opacity: 0 }}
                         >
+                            <Box mx={3}>
+                                <Button
+                                    variant="text"
+                                    onClick={() => setGetStarted(false)}
+                                >
+                                    Go Back
+                                </Button>
+                            </Box>
                             <AnimatePresence>
                                 {true && (
                                     <motion.div
