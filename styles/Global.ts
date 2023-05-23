@@ -19,8 +19,9 @@ body: {
     font-size: calc(14px + .5vm);
     font-family: 'Raleway', Roboto, sans-serif;
     min-width: 100vw;
-    min-height: 100vh;
+    min-height: 100%;
     overflow:'scroll';
+   
    
 }
 a {
@@ -33,11 +34,10 @@ p, h1, h2, h3, h4, h5, h6, span , i, b{
 .container {
     display: flex;
     width: 100vw;
-    height: 100vh;
+    height: 100%;
     justify-content: center;
     align-items: center;
     padding: 1.5rem;
-
     background-color: ${({ theme }) => theme.BACKGROUND_COLOR};
 }
 

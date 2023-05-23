@@ -22,7 +22,7 @@ const MainContainer: FC<PageProps> = ({ children, title }) => {
         <div
             style={{
                 backgroundColor: theme.BACKGROUND_COLOR,
-                height: '100vh',
+                height: '100%',
                 width: '100vw',
                 overflow: 'scroll',
                 scrollBehavior: 'smooth',

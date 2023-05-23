@@ -2,7 +2,7 @@ import { DefaultTheme } from 'styled-components';
 
 export const lightTheme: DefaultTheme = {
     mode: 'light',
-    BACKGROUND_COLOR: '#edede9',
+    BACKGROUND_COLOR: '#ffffff',
     TEXT_COLOR: '#212121',
     BUTTON_TEXT_COLOR: '#ffffff',
     CARD_BACKGROUND: '#bcb8b1',

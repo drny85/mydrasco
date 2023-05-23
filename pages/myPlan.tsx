@@ -279,14 +279,22 @@ const MyPlan = () => {
     ]);
 
     return (
-        <div style={{ backgroundColor: theme.BACKGROUND_COLOR }}>
+        <div
+            style={{
+                backgroundColor: theme.BACKGROUND_COLOR,
+                height: '100%',
+                minHeight: '80vh',
+                display: 'flex',
+                flex: 1,
+                flexDirection: 'column',
+            }}
+        >
             <div
                 style={{
                     backgroundColor: theme.BACKGROUND_COLOR,
-                    margin: '2rem auto',
+                    margin: '1rem auto',
                     width: '100%',
                     maxWidth: '880px',
-
                     height: '100%',
                 }}
             >
@@ -470,6 +478,7 @@ const MyPlan = () => {
                                 flexDirection: 'column',
                                 margin: '0 auto',
                                 width: '100%',
+                                backgroundColor: theme.BACKGROUND_COLOR,
                                 height: '100%',
                             }}
                             initial={{ opacity: 0 }}
@@ -487,6 +496,7 @@ const MyPlan = () => {
                             <AnimatePresence>
                                 {true && (
                                     <motion.div
+                                        style={{ height: '100%' }}
                                         initial={{
                                             opacity: 0,
                                             y: -1000,

@@ -192,7 +192,16 @@ const ReviewModal = () => {
                             alignItems={'center'}
                             width={'100%'}
                         >
-                            <Button variant="contained">Save Quote</Button>
+                            <Button
+                                onClick={() => {
+                                    alert(
+                                        'Glad you want to save it but this function is not implemented yet. Please contact us for more information. Thank you for your patience. :)'
+                                    );
+                                }}
+                                variant="contained"
+                            >
+                                Save Quote
+                            </Button>
                         </Box>
                     </Box>
                 </Fade>
