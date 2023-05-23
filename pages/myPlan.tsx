@@ -279,14 +279,15 @@ const MyPlan = () => {
     ]);
 
     return (
-        <MainContainer>
+        <div style={{ backgroundColor: theme.BACKGROUND_COLOR }}>
             <div
                 style={{
                     backgroundColor: theme.BACKGROUND_COLOR,
                     margin: '2rem auto',
                     width: '100%',
                     maxWidth: '880px',
-                    marginBottom: '2rem',
+
+                    height: '100%',
                 }}
             >
                 <AnimateElementIf show={lines.length > 0}>
@@ -303,6 +304,9 @@ const MyPlan = () => {
                                 alignItems: 'center',
                                 flexDirection: 'column',
                                 margin: '1rem auto',
+                                height: '100%',
+                                overflow: 'scroll',
+                                marginBottom: '20px',
                             }}
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
@@ -626,7 +630,7 @@ const MyPlan = () => {
                 />
             </div>
             <div style={{ height: '100px' }}></div>
-        </MainContainer>
+        </div>
     );
 };
 
