@@ -1,13 +1,25 @@
 import React, { useEffect } from 'react';
 import MainContainer from '../components/MainContainer';
-import { Box, List, ListItem, ListItemText, Paper } from '@mui/material';
+import {
+    Box,
+    Button,
+    List,
+    ListItem,
+    ListItemText,
+    Paper,
+} from '@mui/material';
 import { useAppDispatch, useAppSelector } from '../redux/hooks/reduxHooks';
 import Login from '.';
 import { Quote } from '../redux/quotesSlide';
 import { db } from '../firebase';
 import { useRouter } from 'next/router';
+import moment from 'moment';
+import { setLinesData } from '../redux/wirelessSlide';
 
-const Quotes = () => {
+interface Props {
+    onGoBack: () => void;
+}
+const Quotes = ({ onGoBack }: Props) => {
     const user = useAppSelector((s) => s.auth.user);
 
     const dispatch = useAppDispatch();
@@ -23,7 +35,10 @@ const Quotes = () => {
             console.log(error);
         }
     };
-    const goToQuote = () => {};
+    const goToQuote = (q: Quote) => {
+        dispatch(setLinesData(q.lines));
+        onGoBack();
+    };
 
     console.log(quotes);
     useEffect(() => {
@@ -37,30 +52,73 @@ const Quotes = () => {
                     flexDirection: 'column',
                     alignItems: 'center',
                     margin: '1rem auto',
+                    width: '100%',
                 }}
             >
                 <div>
-                    <h2 style={{ textAlign: 'center', marginBottom: '1rem' }}>
-                        Quotes
-                    </h2>
-                    <Paper
-                        elevation={3}
-                        sx={{ width: '100%', height: '100%', minWidth: '40vw' }}
+                    <Box
+                        minWidth={{
+                            xs: '100%',
+                            sm: '100%',
+                            md: 500,
+                            lg: '100%',
+                            xl: '100%',
+                        }}
+                        display={'flex'}
+                        justifyContent={'space-between'}
+                        alignItems={'center'}
                     >
-                        <List>
-                            {quotes.map((quote) => (
+                        <Button variant="text" onClick={onGoBack}>
+                            Back
+                        </Button>
+                        <h2
+                            style={{
+                                textAlign: 'center',
+                                marginBottom: '1rem',
+                            }}
+                        >
+                            Quotes
+                        </h2>
+                        <div></div>
+                    </Box>
+
+                    <Box width={'100%'}>
+                        <List
+                            sx={{
+                                width: '100%',
+                            }}
+                        >
+                            {quotes.map((quote, index) => (
                                 <ListItem
-                                    onClick={goToQuote}
-                                    sx={{ cursor: 'pointer' }}
+                                    onClick={() => goToQuote(quote)}
+                                    sx={{ cursor: 'pointer', margin: '1rem 0' }}
                                     key={quote.id}
                                 >
-                                    <ListItemText
-                                        primary={quote.customerName}
-                                    />
+                                    <Box
+                                        display={'flex'}
+                                        width={'100%'}
+                                        px={3}
+                                        py={2}
+                                        borderRadius={1}
+                                        boxShadow={
+                                            '0px 0px 10px rgba(0,0,0,0.3)'
+                                        }
+                                        alignItems={'center'}
+                                        justifyContent={'space-between'}
+                                    >
+                                        <h3>
+                                            {index + 1} - {quote.customerName}
+                                        </h3>
+                                        <p>
+                                            {moment(quote.createdAt).format(
+                                                'lll'
+                                            )}
+                                        </p>
+                                    </Box>
                                 </ListItem>
                             ))}
                         </List>
-                    </Paper>
+                    </Box>
                 </div>
             </div>
         </MainContainer>

@@ -21,12 +21,13 @@ import ReviewModal from '../components/modals/ReviewModal';
 import { NON_PREMIUM_BYOD_VALUE, PREMIUM_BYOD_VALUE } from '../constant';
 import { toogleHoverPlan } from '../redux/wirelessSlide';
 import Head from 'next/head';
+import Quotes from './quotes';
 
 const MyPlan = () => {
     const theme = useAppSelector((state) => state.theme);
     const [unlimitedPlus, setUnlimitedPlus] = React.useState(90);
     const [unlimitedWelcome, setUnlimitedWelcome] = React.useState(75);
-
+    const [viewQuotes, setViewQuotes] = React.useState(false);
     const [popularPlans, setPopularPlans] = React.useState(false);
     const [showPerkAlertModal, setShowPerkAlertModal] = React.useState(false);
     const [perkToAdd, setPerkToAdd] = useState<{ perK: Perk; line: Line }>();
@@ -281,6 +282,8 @@ const MyPlan = () => {
         expressHasFios,
         getStarted,
     ]);
+
+    if (viewQuotes) return <Quotes onGoBack={() => setViewQuotes(false)} />;
 
     return (
         <div
@@ -662,7 +665,12 @@ const MyPlan = () => {
                                         initial={{ opacity: 0 }}
                                         animate={{ opacity: 1 }}
                                     >
-                                        <TotalView lines={lines} />
+                                        <TotalView
+                                            lines={lines}
+                                            onViewQouteClick={() =>
+                                                setViewQuotes(true)
+                                            }
+                                        />
                                     </motion.div>
                                 )}
                             </AnimatePresence>

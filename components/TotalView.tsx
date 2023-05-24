@@ -29,9 +29,10 @@ import { Perk } from './PerksView';
 type Props = {
     lines: Line[];
     modalView?: boolean;
+    onViewQouteClick?: () => void;
 };
 
-const TotalView = ({ lines, modalView = false }: Props) => {
+const TotalView = ({ lines, modalView = false, onViewQouteClick }: Props) => {
     const theme = useAppSelector((s) => s.theme);
     const router = useRouter();
     const dispatch = useAppDispatch();
@@ -410,12 +411,7 @@ const TotalView = ({ lines, modalView = false }: Props) => {
                         arrow
                         placeholder="top"
                     >
-                        <Button
-                            onClick={() => {
-                                router.push('/quotes');
-                            }}
-                            variant="text"
-                        >
+                        <Button onClick={onViewQouteClick} variant="text">
                             View Saved Quotes
                         </Button>
                     </Tooltip>
