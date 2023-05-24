@@ -129,7 +129,10 @@ const PopularPlanCard = (props: Props) => {
                                         theme.mode === 'dark'
                                             ? '#33333340'
                                             : '#ffffff',
-                                    margin: '0.2rem 0',
+                                    margin:
+                                        props.benefits.length === 1
+                                            ? '1.5rem 0'
+                                            : '0.2rem 0',
                                     fontSize: '0.8rem',
                                 }}
                             >
