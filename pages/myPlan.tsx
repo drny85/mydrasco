@@ -475,15 +475,23 @@ const MyPlan = () => {
                                 }}
                             >
                                 <Button
-                                    sx={{ marginRight: '1rem' }}
+                                    sx={{ marginRight: '1rem', minWidth: 140 }}
                                     color="secondary"
                                     onClick={() => {
-                                        setGetStarted(false);
-                                        setPopularPlans(true);
+                                        console.log(popularPlans);
+                                        if (popularPlans) {
+                                            setPopularPlans(false);
+                                            dispatch(setGetStarted(false));
+                                        } else {
+                                            setGetStarted(false);
+                                            setPopularPlans(true);
+                                        }
                                     }}
-                                    variant="outlined"
+                                    variant="contained"
                                 >
-                                    Start with popular plans
+                                    {popularPlans
+                                        ? 'Go Back'
+                                        : 'Start with popular plans'}
                                 </Button>
                                 <Button
                                     sx={{ marginLeft: '1rem' }}
