@@ -34,11 +34,11 @@ const PopularPlans = () => {
                 ]}
             />
             <PopularPlanCard
-                title="Unlimited Plus"
+                title="Unlimited Welcome"
                 perks={[perks.find((p) => p.name === 'walmart+ membership')!]}
                 description="If you love easy shooping, saving & more"
-                totalPrice={90}
-                linePrice={80}
+                totalPrice={75}
+                linePrice={65}
                 benefits={[
                     '5G Ultra Wideband',
                     '30 GB premium mobile hotspot data',
