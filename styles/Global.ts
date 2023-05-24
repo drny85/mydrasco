@@ -18,9 +18,8 @@ const GlobalStyle = createGlobalStyle<Props>`
 body: {
     font-size: calc(14px + .5vm);
     font-family: 'Raleway', Roboto, sans-serif;
-    min-width: 100vw;
-    min-height: 100%;
-    overflow:'scroll';
+    width: 100%;
+    height: 100%;
    
    
 }

@@ -23,6 +23,7 @@ type Props = {
 
 const PerkAlertModal = ({ onClose, open, perk, onSubmitted }: Props) => {
     const theme = useAppSelector((state) => state.theme);
+
     return (
         <Modal
             open={open}

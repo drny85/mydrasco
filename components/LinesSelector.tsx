@@ -8,6 +8,7 @@ import AnimatedNumber from 'animated-number-react';
 import { Line, setLinesData } from '../redux/wirelessSlide';
 import { perks } from '../perks';
 import { v4 } from 'uuid';
+import { toast } from 'react-toastify';
 
 type Props = {};
 
@@ -62,6 +63,11 @@ const LinesSelector = (props: Props) => {
             </p>
             <div
                 onClick={() => {
+                    toast.success('Line added successfully', {
+                        position: 'top-center',
+                        autoClose: 2000,
+                    });
+
                     if (lines.length < 10) {
                         const newLine: Line = {
                             id: v4(),

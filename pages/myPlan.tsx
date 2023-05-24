@@ -1,7 +1,6 @@
 import { Box, Button, Container, Grid, Tooltip } from '@mui/material';
 import { AnimatePresence, motion } from 'framer-motion';
 import React, { useCallback, useEffect, useState } from 'react';
-import MainContainer from '../components/MainContainer';
 
 import GridItem from '../components/GridItem';
 import MyPlanCard from '../components/MyPlanCard';
@@ -10,26 +9,29 @@ import { useAppDispatch, useAppSelector } from '../redux/hooks/reduxHooks';
 
 import { Perk } from '../components/PerksView';
 import { perks } from '../perks';
-import { Line, setLinesData } from '../redux/wirelessSlide';
+import { Line, setGetStarted, setLinesData } from '../redux/wirelessSlide';
 
 import AnimateElementIf from '../components/AnimateElementIf';
 import LineItem from '../components/LineItem';
 import LinesSelector from '../components/LinesSelector';
-import ReviewModal from '../components/modals/ReviewModal';
+import PopularPlans from '../components/PopularPlans';
 import TotalView from '../components/TotalView';
 import PerkAlertModal from '../components/modals/PerkAlertModal';
-import { toogleHoverPlan } from '../redux/wirelessSlide';
+import ReviewModal from '../components/modals/ReviewModal';
 import { NON_PREMIUM_BYOD_VALUE, PREMIUM_BYOD_VALUE } from '../constant';
+import { toogleHoverPlan } from '../redux/wirelessSlide';
 
 const MyPlan = () => {
     const theme = useAppSelector((state) => state.theme);
     const [unlimitedPlus, setUnlimitedPlus] = React.useState(90);
     const [unlimitedWelcome, setUnlimitedWelcome] = React.useState(75);
-    const [getStarted, setGetStarted] = React.useState(false);
+
+    const [popularPlans, setPopularPlans] = React.useState(false);
     const [showPerkAlertModal, setShowPerkAlertModal] = React.useState(false);
     const [perkToAdd, setPerkToAdd] = useState<{ perK: Perk; line: Line }>();
 
     const lines = useAppSelector((state) => state.wireless.lines);
+    const getStarted = useAppSelector((state) => state.wireless.getStarted);
 
     const {
         expressAutoPay,
@@ -276,6 +278,7 @@ const MyPlan = () => {
         expressFirstResponder,
         expressInternet,
         expressHasFios,
+        getStarted,
     ]);
 
     return (
@@ -322,40 +325,52 @@ const MyPlan = () => {
                             transition={{ duration: 0.5 }}
                         >
                             <Container maxWidth={'md'}>
-                                <Grid
-                                    gap={3}
-                                    container
-                                    justifyContent={'center'}
-                                    direction={{
-                                        xs: 'column',
-                                        md: 'row',
-                                        lg: 'row',
-                                    }}
-                                    style={{ marginTop: '2rem' }}
-                                >
-                                    <MyPlanCard
-                                        selected={hoverPlan === 'plus'}
-                                        onClick={() =>
-                                            dispatch(toogleHoverPlan('plus'))
-                                        }
-                                        title="Unlimited Plus"
-                                        price={unlimitedPlus - expressAutoPay}
-                                        description="Our reliable, fastest 5G, up to 10x faster than 4G LTE. No matter how much you use."
-                                    />
+                                {popularPlans && <PopularPlans />}
+                                {!popularPlans && !getStarted && (
+                                    <Grid
+                                        gap={3}
+                                        container
+                                        justifyContent={'center'}
+                                        direction={{
+                                            xs: 'column',
 
-                                    <MyPlanCard
-                                        selected={hoverPlan === 'welcome'}
-                                        onClick={() =>
-                                            dispatch(toogleHoverPlan('welcome'))
-                                        }
-                                        title="Unlimited Welcome"
-                                        price={
-                                            unlimitedWelcome - expressAutoPay
-                                        }
-                                        description="Our reliable, fast 5G."
-                                    />
-                                </Grid>
-                                {hoverPlan === 'plus' && (
+                                            md: 'row',
+                                            lg: 'row',
+                                        }}
+                                        style={{ marginTop: '2rem' }}
+                                    >
+                                        <MyPlanCard
+                                            selected={hoverPlan === 'plus'}
+                                            onClick={() =>
+                                                dispatch(
+                                                    toogleHoverPlan('plus')
+                                                )
+                                            }
+                                            title="Unlimited Plus"
+                                            price={
+                                                unlimitedPlus - expressAutoPay
+                                            }
+                                            description="Our reliable, fastest 5G, up to 10x faster than 4G LTE. No matter how much you use."
+                                        />
+
+                                        <MyPlanCard
+                                            selected={hoverPlan === 'welcome'}
+                                            onClick={() =>
+                                                dispatch(
+                                                    toogleHoverPlan('welcome')
+                                                )
+                                            }
+                                            title="Unlimited Welcome"
+                                            price={
+                                                unlimitedWelcome -
+                                                expressAutoPay
+                                            }
+                                            description="Our reliable, fast 5G."
+                                        />
+                                    </Grid>
+                                )}
+
+                                {hoverPlan === 'plus' && !popularPlans && (
                                     <div>
                                         <Grid
                                             sx={{
@@ -403,7 +418,7 @@ const MyPlan = () => {
                                         </Grid>
                                     </div>
                                 )}
-                                {hoverPlan === 'welcome' && (
+                                {hoverPlan === 'welcome' && !popularPlans && (
                                     <div>
                                         <Grid
                                             sx={{
@@ -460,10 +475,26 @@ const MyPlan = () => {
                                 }}
                             >
                                 <Button
-                                    onClick={() => setGetStarted(true)}
+                                    sx={{ marginRight: '1rem' }}
+                                    color="secondary"
+                                    onClick={() => {
+                                        setGetStarted(false);
+                                        setPopularPlans(true);
+                                    }}
+                                    variant="outlined"
+                                >
+                                    Start with popular plans
+                                </Button>
+                                <Button
+                                    sx={{ marginLeft: '1rem' }}
+                                    onClick={() => {
+                                        setPopularPlans(false);
+
+                                        dispatch(setGetStarted(true));
+                                    }}
                                     variant="contained"
                                 >
-                                    Get Started!
+                                    Start your own plan
                                 </Button>
                             </div>
                         </motion.div>
@@ -488,7 +519,9 @@ const MyPlan = () => {
                             <Box mx={3}>
                                 <Button
                                     variant="text"
-                                    onClick={() => setGetStarted(false)}
+                                    onClick={() =>
+                                        dispatch(setGetStarted(false))
+                                    }
                                 >
                                     Go Back
                                 </Button>

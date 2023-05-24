@@ -12,16 +12,6 @@ export const perks: Perk[] = [
             'The Disney Bundle is the “Something for Everyone” streaming solution from The Walt Disney Company. With the Disney Bundle through Verizon, you get access to thousands of movies, hit series and exclusive sports with subscriptions to Disney+ (No Ads), Hulu (With Ads) and ESPN+ (With Ads).',
     },
     {
-        image: 'https://www.apple.com/v/apple-one/d/images/meta/og__diu4z5hyr8ia_overview.png',
-        name: 'apple one',
-        price: 10,
-        sharabled: false,
-        value: 16.95,
-        selected: false,
-        description:
-            'Apple One bundles together Apple Music®, Apple TV+®, Apple Arcade®, and iCloud+℠ with up to 200 GB of storage. Plus, it’s all ad-free. \n Apple One is available as an Individual or Family subscription through Verizon.',
-    },
-    {
         image: 'https://ss7.vzw.com/is/image/VerizonWireless/perk-tile-mobile-hotspot-1x1-small?fmt=webp-alpha&scl=2',
         name: '100 GB mobile hotspot',
         price: 10,
@@ -31,6 +21,17 @@ export const perks: Perk[] = [
         description:
             'A Mobile Hotspot lets you share your Verizon network connection with other devices so they can access the internet. Devices connect to your Mobile Hotspot using Wi-Fi. While devices are connected, you’re charged for any data they use according to your monthly data plan.',
     },
+    {
+        image: 'https://www.apple.com/v/apple-one/d/images/meta/og__diu4z5hyr8ia_overview.png',
+        name: 'apple one',
+        price: 10,
+        sharabled: false,
+        value: 16.95,
+        selected: false,
+        description:
+            'Apple One bundles together Apple Music®, Apple TV+®, Apple Arcade®, and iCloud+℠ with up to 200 GB of storage. Plus, it’s all ad-free. \n Apple One is available as an Individual or Family subscription through Verizon.',
+    },
+
     {
         image: 'https://ss7.vzw.com/is/image/VerizonWireless/walmart_pop_plans_d?fmt=webp-alpha&scl=2',
         name: 'walmart+ membership',

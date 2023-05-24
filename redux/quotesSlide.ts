@@ -3,16 +3,16 @@ import { Line } from './wirelessSlide';
 
 export interface Quote {
     id: string;
-    name: string;
     email: string;
     message: string;
     createdAt: string;
     updatedAt: string;
-    phone: string;
     status: string;
     hasFios: boolean;
     hasGig: boolean;
+    customerName: string;
     lines: Line[];
+    userId: string;
 }
 interface QuotesState {
     quote: Quote | null;

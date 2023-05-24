@@ -1,3 +1,4 @@
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import {
     Accordion,
     AccordionDetails,
@@ -8,8 +9,8 @@ import {
     Tooltip,
 } from '@mui/material';
 import AnimatedNumber from 'animated-number-react';
-import { useState } from 'react';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import { useRouter } from 'next/router';
+import { toast } from 'react-toastify';
 import { useAppDispatch, useAppSelector } from '../redux/hooks/reduxHooks';
 import {
     Line,
@@ -19,11 +20,11 @@ import {
     setLinesData,
     setReviewModal,
 } from '../redux/wirelessSlide';
+import { byodSavings } from '../utils/byodSavings';
 import { firstResponderDiscount } from '../utils/firstResponderDiscount';
 import { totalPerksCount } from '../utils/totalPerksCount';
 import AnimateElementIf from './AnimateElementIf';
 import { Perk } from './PerksView';
-import { byodSavings } from '../utils/byodSavings';
 
 type Props = {
     lines: Line[];
@@ -32,6 +33,7 @@ type Props = {
 
 const TotalView = ({ lines, modalView = false }: Props) => {
     const theme = useAppSelector((s) => s.theme);
+    const router = useRouter();
     const dispatch = useAppDispatch();
 
     const {
@@ -96,7 +98,7 @@ const TotalView = ({ lines, modalView = false }: Props) => {
     };
 
     const autoPayDiscount = (): number => {
-        return expressAutoPay ? lines.length * 10 : 0;
+        return expressAutoPay === 10 ? lines.length * 10 : 0;
     };
 
     const resetAll = () => {
@@ -166,7 +168,6 @@ const TotalView = ({ lines, modalView = false }: Props) => {
                             lines.reduce((acc, line) => acc + line.price, 0) +
                             mobilePlusHomeDiscount() +
                             autoPayDiscount() +
-                            perksTotal() +
                             byod
                         }
                     />
@@ -201,18 +202,35 @@ const TotalView = ({ lines, modalView = false }: Props) => {
                                     perks)
                                 </span>
                             </p>
-                            <p
+                            <div
                                 style={{
-                                    fontSize: '1.1rem',
+                                    display: 'flex',
+                                    alignItems: 'center',
                                 }}
                             >
-                                ${''}
-                                <AnimatedNumber
-                                    duration={300}
-                                    formatValue={(n: number) => n.toFixed(0)}
-                                    value={perksTotal()}
-                                />
-                            </p>
+                                <i
+                                    style={{
+                                        marginRight: '10px',
+                                        fontSize: '0.8rem',
+                                    }}
+                                >
+                                    (included in subtotal)
+                                </i>
+                                <p
+                                    style={{
+                                        fontSize: '1.1rem',
+                                    }}
+                                >
+                                    ${''}
+                                    <AnimatedNumber
+                                        duration={300}
+                                        formatValue={(n: number) =>
+                                            n.toFixed(0)
+                                        }
+                                        value={perksTotal()}
+                                    />
+                                </p>
+                            </div>
                         </Box>
                     </AccordionSummary>
                     <AccordionDetails>
@@ -392,6 +410,20 @@ const TotalView = ({ lines, modalView = false }: Props) => {
                         arrow
                         placeholder="top"
                     >
+                        <Button
+                            onClick={() => {
+                                router.push('/quotes');
+                            }}
+                            variant="text"
+                        >
+                            View Saved Quotes
+                        </Button>
+                    </Tooltip>
+                    <Tooltip
+                        title="Reset all selections"
+                        arrow
+                        placeholder="top"
+                    >
                         <Button onClick={resetAll} variant="text">
                             RESET ALL
                         </Button>
@@ -399,7 +431,13 @@ const TotalView = ({ lines, modalView = false }: Props) => {
                     <Tooltip title="View Summary" arrow placeholder="top">
                         <Button
                             variant="contained"
-                            onClick={() => dispatch(setReviewModal(true))}
+                            onClick={() => {
+                                toast.success('Reviewed!', {
+                                    position: 'top-center',
+                                    autoClose: 3000,
+                                });
+                                dispatch(setReviewModal('review'));
+                            }}
                             style={{ marginLeft: '10px' }}
                         >
                             View Summary

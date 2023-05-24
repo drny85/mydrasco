@@ -23,17 +23,17 @@ const MainContainer: FC<PageProps> = ({ children, title }) => {
             style={{
                 backgroundColor: theme.BACKGROUND_COLOR,
                 height: '100%',
-                width: '100vw',
-                overflow: 'scroll',
+                width: '100%',
+                maxWidth: '1440px',
                 scrollBehavior: 'smooth',
                 overscrollBehavior: 'contain',
+                margin: '0 auto',
             }}
         >
             <div
                 style={{
                     backgroundColor: theme.BACKGROUND_COLOR,
                     display: 'flex',
-                    maxWidth: '1440px',
                     scrollBehavior: 'smooth',
                     margin: '0 auto',
                     overscrollBehavior: 'contain',

@@ -12,8 +12,9 @@ interface DataState {
     BYOD: boolean;
     hoverPlan: 'plus' | 'welcome' | undefined;
     lines: Line[];
-    reviewModal: boolean;
+    reviewModal: 'review' | 'quote' | undefined;
     planView: 'myPlan' | 'oldPlan';
+    getStarted: boolean;
 }
 export interface Line {
     id: string;
@@ -32,7 +33,8 @@ const initialState: DataState = {
     BYOD: false,
     hoverPlan: undefined,
     lines: [],
-    reviewModal: false,
+    reviewModal: undefined,
+    getStarted: false,
     planView: 'myPlan',
 };
 const wirelessSlide = createSlice({
@@ -83,7 +85,10 @@ const wirelessSlide = createSlice({
         ) => {
             state.hoverPlan = payload;
         },
-        setReviewModal: (state, { payload }: PayloadAction<boolean>) => {
+        setReviewModal: (
+            state,
+            { payload }: PayloadAction<DataState['reviewModal']>
+        ) => {
             state.reviewModal = payload;
         },
         toogleView: (
@@ -91,6 +96,9 @@ const wirelessSlide = createSlice({
             { payload }: PayloadAction<'myPlan' | 'oldPlan'>
         ) => {
             state.planView = payload;
+        },
+        setGetStarted: (state, { payload }: PayloadAction<boolean>) => {
+            state.getStarted = payload;
         },
     },
 });
@@ -106,6 +114,7 @@ export const {
     setLinesData,
     toogleHoverPlan,
     setReviewModal,
+    setGetStarted,
     toogleView,
 } = wirelessSlide.actions;
 

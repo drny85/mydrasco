@@ -1,8 +1,5 @@
-import React from 'react';
-import { useAppSelector } from '../redux/hooks/reduxHooks';
-import { Line } from '../redux/wirelessSlide';
-import PerksView, { Perk } from './PerksView';
-import { AnimatePresence, motion } from 'framer-motion';
+import DeleteIcon from '@mui/icons-material/Delete';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import {
     Accordion,
     AccordionDetails,
@@ -11,10 +8,13 @@ import {
     Button,
     Tooltip,
 } from '@mui/material';
-import Switcher from './Switcher';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import DeleteIcon from '@mui/icons-material/Delete';
+import { motion } from 'framer-motion';
+import React from 'react';
+import { useAppSelector } from '../redux/hooks/reduxHooks';
+import { Line } from '../redux/wirelessSlide';
 import { totalPerksCount } from '../utils/totalPerksCount';
+import PerksView, { Perk } from './PerksView';
+import Switcher from './Switcher';
 
 const LineItem = ({
     line,
