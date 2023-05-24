@@ -63,7 +63,7 @@ const PopularPlanCard = (props: Props) => {
                     width={'100%'}
                     boxShadow={'0px 0px 10px rgba(0,0,0,0.1)'}
                     padding={2}
-                    minWidth={300}
+                    minWidth={250}
                     flexDirection="column"
                     p={2}
                 >

@@ -1,4 +1,4 @@
-import { Box, Button, Tab, Tabs } from '@mui/material';
+import { Box, Button, Hidden, Tab, Tabs } from '@mui/material';
 import Head from 'next/head';
 import MainContainer from '../components/MainContainer';
 import { useAppDispatch, useAppSelector } from '../redux/hooks/reduxHooks';
@@ -543,14 +543,17 @@ const Plans = () => {
                             label="Home"
                             sx={{ color: theme.TEXT_COLOR }}
                         />
+
                         <Tab
                             icon={<LiveTvIcon />}
                             iconPosition="start"
                             label="Fios TV"
                             sx={{
                                 color: theme.TEXT_COLOR,
+                                display: { xs: 'none', sm: 'block' },
                             }}
                         />
+
                         <Tab
                             icon={<AddShoppingCartIcon />}
                             iconPosition="start"
