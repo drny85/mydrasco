@@ -39,11 +39,7 @@ const PopularPlans = () => {
                 description="If you love easy shooping, saving & more"
                 totalPrice={75}
                 linePrice={65}
-                benefits={[
-                    '5G Ultra Wideband',
-                    '30 GB premium mobile hotspot data',
-                    '3-year price guarantee',
-                ]}
+                benefits={['5G']}
             />
             <PopularPlanCard
                 title="Unlimited Plus"
