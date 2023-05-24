@@ -1,6 +1,6 @@
-import React from 'react';
-import HoverElement from './HoverElement';
 import { Box, Grid } from '@mui/material';
+import { v4 } from 'uuid';
+import { perks } from '../perks';
 import { useAppDispatch, useAppSelector } from '../redux/hooks/reduxHooks';
 import {
     Line,
@@ -8,8 +8,7 @@ import {
     setGetStarted,
     setLinesData,
 } from '../redux/wirelessSlide';
-import { v4 } from 'uuid';
-import { perks } from '../perks';
+import HoverElement from './HoverElement';
 import { Perk } from './PerksView';
 
 type Props = {
@@ -18,7 +17,6 @@ type Props = {
     totalPrice: number;
     description: string;
     benefits: string[];
-    //onClick: () => void;
     perks: Perk[];
 };
 

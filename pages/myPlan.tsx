@@ -20,6 +20,7 @@ import PerkAlertModal from '../components/modals/PerkAlertModal';
 import ReviewModal from '../components/modals/ReviewModal';
 import { NON_PREMIUM_BYOD_VALUE, PREMIUM_BYOD_VALUE } from '../constant';
 import { toogleHoverPlan } from '../redux/wirelessSlide';
+import Head from 'next/head';
 
 const MyPlan = () => {
     const theme = useAppSelector((state) => state.theme);
@@ -301,6 +302,9 @@ const MyPlan = () => {
                     height: '100%',
                 }}
             >
+                <Head>
+                    <title>My Plan</title>
+                </Head>
                 <AnimateElementIf show={lines.length > 0}>
                     <TopSwicher />
                 </AnimateElementIf>

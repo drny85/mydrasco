@@ -1,25 +1,11 @@
-import { Box, Grid } from '@mui/material';
-import React from 'react';
-import { useAppDispatch, useAppSelector } from '../redux/hooks/reduxHooks';
+import { Grid } from '@mui/material';
 import { perks } from '../perks';
-import HoverElement from './HoverElement';
-import {
-    setExpressAutoPay,
-    setGetStarted,
-    setLinesData,
-} from '../redux/wirelessSlide';
-import { v4 } from 'uuid';
+
 import PopularPlanCard from './PopularPlanCard';
 
-type Props = {};
-
-const PopularPlans = (props: Props) => {
-    const theme = useAppSelector((s) => s.theme);
-    const lines = useAppSelector((s) => s.wireless.lines);
-    const dispatch = useAppDispatch();
-
+const PopularPlans = () => {
     return (
-        <Grid container width={'100%'} spacing={2} sx={{ cursor: 'pointer' }}>
+        <Grid container width={'100%'} spacing={3} sx={{ cursor: 'pointer' }}>
             <PopularPlanCard
                 title="Unlimited Plus"
                 perks={[
@@ -32,6 +18,7 @@ const PopularPlans = (props: Props) => {
                 benefits={[
                     '5G Ultra Wideband',
                     '30 GB premium mobile hotspot data',
+                    '3-year price guarantee',
                 ]}
             />
             <PopularPlanCard
@@ -43,6 +30,7 @@ const PopularPlans = (props: Props) => {
                 benefits={[
                     '5G Ultra Wideband',
                     '30 GB premium mobile hotspot data',
+                    '3-year price guarantee',
                 ]}
             />
             <PopularPlanCard
@@ -54,6 +42,7 @@ const PopularPlans = (props: Props) => {
                 benefits={[
                     '5G Ultra Wideband',
                     '30 GB premium mobile hotspot data',
+                    '3-year price guarantee',
                 ]}
             />
             <PopularPlanCard
@@ -68,6 +57,7 @@ const PopularPlans = (props: Props) => {
                 benefits={[
                     '5G Ultra Wideband',
                     '30 GB premium mobile hotspot data',
+                    '3-year price guarantee',
                 ]}
             />
         </Grid>
