@@ -9,7 +9,12 @@ import { useAppDispatch, useAppSelector } from '../redux/hooks/reduxHooks';
 
 import { Perk } from '../components/PerksView';
 import { perks } from '../perks';
-import { Line, setGetStarted, setLinesData } from '../redux/wirelessSlide';
+import {
+    Line,
+    setGetStarted,
+    setLinesData,
+    setQuotes,
+} from '../redux/wirelessSlide';
 
 import AnimateElementIf from '../components/AnimateElementIf';
 import LineItem from '../components/LineItem';
@@ -22,8 +27,11 @@ import { NON_PREMIUM_BYOD_VALUE, PREMIUM_BYOD_VALUE } from '../constant';
 import { toogleHoverPlan } from '../redux/wirelessSlide';
 import Head from 'next/head';
 import Quotes from './quotes';
+import { db } from '../firebase';
+import { Quote } from '../redux/quotesSlide';
 
 const MyPlan = () => {
+    const user = useAppSelector((s) => s.auth.user);
     const theme = useAppSelector((state) => state.theme);
     const [unlimitedPlus, setUnlimitedPlus] = React.useState(90);
     const [unlimitedWelcome, setUnlimitedWelcome] = React.useState(75);
@@ -33,6 +41,7 @@ const MyPlan = () => {
     const [perkToAdd, setPerkToAdd] = useState<{ perK: Perk; line: Line }>();
 
     const lines = useAppSelector((state) => state.wireless.lines);
+    const quotes = useAppSelector((state) => state.wireless.quotes);
     const getStarted = useAppSelector((state) => state.wireless.getStarted);
 
     const {

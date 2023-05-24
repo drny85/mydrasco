@@ -7,17 +7,21 @@ import {
     Button,
     Divider,
     Tooltip,
+    dividerClasses,
 } from '@mui/material';
 import AnimatedNumber from 'animated-number-react';
-import { useRouter } from 'next/router';
+import { useEffect } from 'react';
 import { toast } from 'react-toastify';
+import { db } from '../firebase';
 import { useAppDispatch, useAppSelector } from '../redux/hooks/reduxHooks';
+import { Quote } from '../redux/quotesSlide';
 import {
     Line,
     setExpressAutoPay,
     setExpressFirstResponder,
     setExpressHasFios,
     setLinesData,
+    setQuotes,
     setReviewModal,
 } from '../redux/wirelessSlide';
 import { byodSavings } from '../utils/byodSavings';
@@ -34,7 +38,9 @@ type Props = {
 
 const TotalView = ({ lines, modalView = false, onViewQouteClick }: Props) => {
     const theme = useAppSelector((s) => s.theme);
-    const router = useRouter();
+    const user = useAppSelector((s) => s.auth.user);
+    const quotes = useAppSelector((s) => s.wireless.quotes);
+
     const dispatch = useAppDispatch();
 
     const {
@@ -108,6 +114,20 @@ const TotalView = ({ lines, modalView = false, onViewQouteClick }: Props) => {
         dispatch(setExpressFirstResponder(false));
         dispatch(setExpressHasFios(false));
     };
+
+    const loadQuotes = async () => {
+        try {
+            const q = await db.collection('quotes').get();
+            const data = q.docs.map((doc) => ({ ...(doc.data() as Quote) }));
+            dispatch(setQuotes(data));
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
+    useEffect(() => {
+        loadQuotes();
+    }, [user, quotes.length]);
 
     return (
         <Box
@@ -411,9 +431,13 @@ const TotalView = ({ lines, modalView = false, onViewQouteClick }: Props) => {
                         arrow
                         placeholder="top"
                     >
-                        <Button onClick={onViewQouteClick} variant="text">
-                            View Saved Quotes
-                        </Button>
+                        {quotes.length > 0 ? (
+                            <Button onClick={onViewQouteClick} variant="text">
+                                View Saved Quotes
+                            </Button>
+                        ) : (
+                            <div></div>
+                        )}
                     </Tooltip>
                     <Tooltip
                         title="Reset all selections"

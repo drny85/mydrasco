@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import moment from 'moment';
 import { Perk } from '../components/PerksView';
+import { Quote } from './quotesSlide';
 
 interface DataState {
     expressAutoPay: 0 | 10;
@@ -15,6 +16,7 @@ interface DataState {
     reviewModal: 'review' | 'quote' | undefined;
     planView: 'myPlan' | 'oldPlan';
     getStarted: boolean;
+    quotes: Quote[];
 }
 export interface Line {
     id: string;
@@ -36,6 +38,7 @@ const initialState: DataState = {
     reviewModal: undefined,
     getStarted: false,
     planView: 'myPlan',
+    quotes: [],
 };
 const wirelessSlide = createSlice({
     name: 'wireless',
@@ -100,6 +103,9 @@ const wirelessSlide = createSlice({
         setGetStarted: (state, { payload }: PayloadAction<boolean>) => {
             state.getStarted = payload;
         },
+        setQuotes: (state, { payload }: PayloadAction<Quote[]>) => {
+            state.quotes = payload;
+        },
     },
 });
 
@@ -116,6 +122,7 @@ export const {
     setReviewModal,
     setGetStarted,
     toogleView,
+    setQuotes,
 } = wirelessSlide.actions;
 
 export default wirelessSlide.reducer;
