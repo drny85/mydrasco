@@ -152,7 +152,7 @@ const Plans = () => {
     };
 
     const newDiscountPerLine = (
-        internet_plan: '200' | '400' | 'gig' | undefined,
+        internet_plan: '200' | '400' | 'gig' | '2gig' | undefined,
         hasInternet: boolean
     ): number => {
         if (
