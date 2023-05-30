@@ -46,7 +46,6 @@ const Quotes = ({ onGoBack }: Props) => {
         onGoBack();
     };
 
-    console.log(quotes);
     useEffect(() => {
         loadQuotes();
     }, [user]);

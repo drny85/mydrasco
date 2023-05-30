@@ -9,13 +9,9 @@ import { useAppDispatch, useAppSelector } from '../redux/hooks/reduxHooks';
 
 import { Perk } from '../components/PerksView';
 import { perks } from '../perks';
-import {
-    Line,
-    setGetStarted,
-    setLinesData,
-    setQuotes,
-} from '../redux/wirelessSlide';
+import { Line, setGetStarted, setLinesData } from '../redux/wirelessSlide';
 
+import Head from 'next/head';
 import AnimateElementIf from '../components/AnimateElementIf';
 import LineItem from '../components/LineItem';
 import LinesSelector from '../components/LinesSelector';
@@ -25,10 +21,7 @@ import PerkAlertModal from '../components/modals/PerkAlertModal';
 import ReviewModal from '../components/modals/ReviewModal';
 import { NON_PREMIUM_BYOD_VALUE, PREMIUM_BYOD_VALUE } from '../constant';
 import { toogleHoverPlan } from '../redux/wirelessSlide';
-import Head from 'next/head';
 import Quotes from './quotes';
-import { db } from '../firebase';
-import { Quote } from '../redux/quotesSlide';
 
 const MyPlan = () => {
     const user = useAppSelector((s) => s.auth.user);
@@ -204,8 +197,7 @@ const MyPlan = () => {
 
     const mobilePlusHome = (line: Line): number => {
         if (
-            expressInternet === 'gig' &&
-            expressHasFios &&
+            (expressInternet === 'gig' || expressInternet === '2gig') &&
             line.name === 'Unlimited Plus'
         ) {
             return 10;
@@ -217,6 +209,36 @@ const MyPlan = () => {
             return 5;
         } else if (expressHasFios && expressInternet !== 'gig') {
             return 5;
+        } else {
+            return 0;
+        }
+    };
+
+    const calculateLoyaltyBonus = (
+        line: Line,
+        internet: typeof expressInternet
+    ): number => {
+        if (!expressHasFios || lines.length === 0) return 0;
+        const gig = internet === 'gig' || internet === '2gig';
+        if (line.name === 'Unlimited Plus') {
+            if (gig) {
+                return lines.length === 1 ? 25 : lines.length === 2 ? 15 : 0;
+            }
+            return lines.length === 1
+                ? 30
+                : lines.length === 2
+                ? 20
+                : lines.length === 3
+                ? 5
+                : 0;
+        } else if (line.name === 'Unlimited Welcome') {
+            return lines.length === 1
+                ? 30
+                : lines.length === 2
+                ? 20
+                : lines.length === 3
+                ? 5
+                : 0;
         } else {
             return 0;
         }
@@ -240,7 +262,8 @@ const MyPlan = () => {
                             : 0) -
                         expressAutoPay -
                         mobilePlusHome(line) -
-                        (line.byod ? NON_PREMIUM_BYOD_VALUE : 0) +
+                        (line.byod ? NON_PREMIUM_BYOD_VALUE : 0) -
+                        calculateLoyaltyBonus(line, expressInternet) +
                         perksTotal(line)
                     );
                 case 'Unlimited Plus':
@@ -258,7 +281,8 @@ const MyPlan = () => {
                             : 0) -
                         expressAutoPay -
                         mobilePlusHome(line) -
-                        (line.byod ? PREMIUM_BYOD_VALUE : 0) +
+                        (line.byod ? PREMIUM_BYOD_VALUE : 0) -
+                        calculateLoyaltyBonus(line, expressInternet) +
                         perksTotal(line)
                     );
                 default:
@@ -266,7 +290,7 @@ const MyPlan = () => {
             }
         },
         [
-            lines,
+            lines.length,
             expressAutoPay,
             expressFirstResponder,
             expressInternet,

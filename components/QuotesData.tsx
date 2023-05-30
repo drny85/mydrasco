@@ -55,51 +55,54 @@ const QuotesData = ({ onViewClick, onDelete, onSummaryView }: Props) => {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {rows.map((row) => (
-                        <TableRow
-                            key={row.name}
-                            sx={{
-                                '&:last-child td, &:last-child th': {
-                                    border: 0,
-                                },
-                            }}
-                        >
-                            <TableCell
-                                sx={{ textTransform: 'capitalize' }}
-                                component="th"
-                                scope="row"
+                    {rows
+                        .sort((a, b) => a.createdAt.localeCompare(b.createdAt))
+                        .reverse()
+                        .map((row) => (
+                            <TableRow
+                                key={row.name}
+                                sx={{
+                                    '&:last-child td, &:last-child th': {
+                                        border: 0,
+                                    },
+                                }}
                             >
-                                {row.name}
-                            </TableCell>
+                                <TableCell
+                                    sx={{ textTransform: 'capitalize' }}
+                                    component="th"
+                                    scope="row"
+                                >
+                                    {row.name}
+                                </TableCell>
 
-                            <TableCell>{row.lines}</TableCell>
-                            <TableCell>
-                                {moment(row.createdAt).format('lll')}
-                            </TableCell>
-                            <TableCell>
-                                <Button
-                                    onClick={() => onViewClick(row.id)}
-                                    variant="text"
-                                >
-                                    View
-                                </Button>
-                            </TableCell>
-                            <TableCell>
-                                <Button
-                                    color="success"
-                                    onClick={() => onSummaryView(row.id)}
-                                    variant="text"
-                                >
-                                    Summary
-                                </Button>
-                            </TableCell>
-                            <TableCell>
-                                <Box onClick={() => onDelete(row.id)}>
-                                    <DeleteIcon />
-                                </Box>
-                            </TableCell>
-                        </TableRow>
-                    ))}
+                                <TableCell>{row.lines}</TableCell>
+                                <TableCell>
+                                    {moment(row.createdAt).format('lll')}
+                                </TableCell>
+                                <TableCell>
+                                    <Button
+                                        onClick={() => onViewClick(row.id)}
+                                        variant="text"
+                                    >
+                                        View
+                                    </Button>
+                                </TableCell>
+                                <TableCell>
+                                    <Button
+                                        color="success"
+                                        onClick={() => onSummaryView(row.id)}
+                                        variant="text"
+                                    >
+                                        Summary
+                                    </Button>
+                                </TableCell>
+                                <TableCell>
+                                    <Box onClick={() => onDelete(row.id)}>
+                                        <DeleteIcon />
+                                    </Box>
+                                </TableCell>
+                            </TableRow>
+                        ))}
                 </TableBody>
             </Table>
         </TableContainer>

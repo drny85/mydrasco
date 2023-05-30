@@ -56,7 +56,7 @@ const TotalView = ({ lines, modalView = false, onViewQouteClick }: Props) => {
             .map((line) =>
                 line.name === 'Unlimited Plus' &&
                 expressHasFios &&
-                expressInternet === 'gig'
+                (expressInternet === '2gig' || expressInternet === 'gig')
                     ? { discount: 10 }
                     : line.name === 'Unlimited Plus' &&
                       expressHasFios &&
@@ -237,6 +237,7 @@ const TotalView = ({ lines, modalView = false, onViewQouteClick }: Props) => {
                             lines.reduce((acc, line) => acc + line.price, 0) +
                             mobilePlusHomeDiscount() +
                             autoPayDiscount() +
+                            loyaltyBonusDiscount() +
                             byod
                         }
                     />

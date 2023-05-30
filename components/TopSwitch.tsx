@@ -80,7 +80,7 @@ const TopSwicher = () => {
                             exit={{ opacity: 0 }}
                         >
                             <Switcher
-                                text={'1 GIG Fios Internet?'}
+                                text={'1 GIG Internet?'}
                                 checked={expressInternet === 'gig'}
                                 value={
                                     expressInternet === 'gig' ? 'gig' : '200'
@@ -96,7 +96,7 @@ const TopSwicher = () => {
                                 }}
                             />
                             <Switcher
-                                text={'2 GIG Fios Internet?'}
+                                text={'2 GIG Internet?'}
                                 checked={expressInternet === '2gig'}
                                 value={
                                     expressInternet === '2gig' ? 'gig' : '200'

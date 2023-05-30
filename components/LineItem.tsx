@@ -48,7 +48,7 @@ const LineItem = ({
                     flexDirection: 'row',
                     alignItems: 'center',
                     backgroundColor: theme.BACKGROUND_COLOR,
-                    boxShadow: '-2px 0px 4px 4px rgba(0, 0, 0, 0.25)',
+                    boxShadow: '-2px 0px 4px 4px rgba(0, 0, 0, 0.10)',
                     borderRadius: '0.3rem',
                 }}
             >
