@@ -28,8 +28,14 @@ const ReviewModal = () => {
     const theme = useAppSelector((s) => s.theme);
     const userId = useAppSelector((s) => s.auth.user?.id);
     const dispatch = useAppDispatch();
-    const { lines, expressHasFios, expressInternet, reviewModal } =
-        useAppSelector((s) => s.wireless);
+    const {
+        lines,
+        expressHasFios,
+        expressInternet,
+        reviewModal,
+        expressAutoPay,
+        expressFirstResponder,
+    } = useAppSelector((s) => s.wireless);
     const [email, setEmail] = useState('');
     const [message, setMessage] = useState('');
     const [customerName, setCustomerName] = useState('');
@@ -57,6 +63,8 @@ const ReviewModal = () => {
                 updatedAt: new Date().toISOString(),
                 message: message,
                 customerName,
+                isAutoPay: expressAutoPay === 10,
+                isFirstResponder: expressFirstResponder,
             };
 
             await db.collection('quotes').add({ ...newQuote });

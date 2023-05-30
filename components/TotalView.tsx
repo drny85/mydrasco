@@ -7,7 +7,6 @@ import {
     Button,
     Divider,
     Tooltip,
-    dividerClasses,
 } from '@mui/material';
 import AnimatedNumber from 'animated-number-react';
 import { useEffect } from 'react';
@@ -61,10 +60,59 @@ const TotalView = ({ lines, modalView = false, onViewQouteClick }: Props) => {
                     ? { discount: 10 }
                     : line.name === 'Unlimited Plus' &&
                       expressHasFios &&
+                      expressInternet !== '2gig' &&
                       expressInternet !== 'gig'
                     ? { discount: 5 }
                     : line.name === 'Unlimited Welcome' && expressHasFios
                     ? { discount: 5 }
+                    : { discount: 0 }
+            )
+            .reduce((acc, line) => acc + line.discount, 0);
+    };
+
+    const loyaltyBonusDiscount = (): number => {
+        return lines
+            .map((line) =>
+                (line.name === 'Unlimited Welcome' ||
+                    line.name === 'Unlimited Plus') &&
+                expressInternet !== '2gig' &&
+                expressInternet !== 'gig' &&
+                expressHasFios
+                    ? {
+                          discount:
+                              lines.length === 1
+                                  ? 30
+                                  : lines.length === 2
+                                  ? 20
+                                  : lines.length === 3
+                                  ? 5
+                                  : 0,
+                      }
+                    : line.name === 'Unlimited Plus' &&
+                      (expressInternet === '2gig' ||
+                          expressInternet === 'gig') &&
+                      expressHasFios
+                    ? {
+                          discount:
+                              lines.length === 1
+                                  ? 25
+                                  : lines.length === 2
+                                  ? 15
+                                  : 0,
+                      }
+                    : line.name === 'Unlimited Welcome' &&
+                      expressHasFios &&
+                      (expressInternet === 'gig' || expressInternet === '2gig')
+                    ? {
+                          discount:
+                              lines.length === 1
+                                  ? 30
+                                  : lines.length === 2
+                                  ? 20
+                                  : lines.length === 3
+                                  ? 5
+                                  : 0,
+                      }
                     : { discount: 0 }
             )
             .reduce((acc, line) => acc + line.discount, 0);
@@ -354,6 +402,33 @@ const TotalView = ({ lines, modalView = false, onViewQouteClick }: Props) => {
                             duration={300}
                             formatValue={(n: number) => n.toFixed(0)}
                             value={mobilePlusHomeDiscount()}
+                        />
+                    </p>
+                </Box>
+            </AnimateElementIf>
+            <AnimateElementIf
+                show={expressHasFios && loyaltyBonusDiscount() > 0}
+            >
+                <Box
+                    my={1}
+                    display={'flex'}
+                    justifyContent={'space-between'}
+                    alignItems={'center'}
+                    width={'100%'}
+                >
+                    <p
+                        style={{
+                            fontSize: '1.1rem',
+                        }}
+                    >
+                        M + Home Lotalty Bonus Discount
+                    </p>
+                    <p style={{ fontSize: '1.1rem' }}>
+                        -$
+                        <AnimatedNumber
+                            duration={300}
+                            formatValue={(n: number) => n.toFixed(0)}
+                            value={loyaltyBonusDiscount()}
                         />
                     </p>
                 </Box>

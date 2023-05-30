@@ -13,6 +13,8 @@ export interface Quote {
     customerName: string;
     lines: Line[];
     userId: string;
+    isAutoPay: boolean;
+    isFirstResponder: boolean;
 }
 interface QuotesState {
     quote: Quote | null;

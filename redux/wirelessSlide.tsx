@@ -9,7 +9,7 @@ interface DataState {
     expressHasFios: boolean;
     expressBonus: number;
     expressWhithin30Days: boolean;
-    expressInternet: '200' | '400' | 'gig' | undefined;
+    expressInternet: '200' | '400' | 'gig' | '2gig' | undefined;
     BYOD: boolean;
     hoverPlan: 'plus' | 'welcome' | undefined;
     lines: Line[];

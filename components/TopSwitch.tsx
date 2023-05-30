@@ -24,7 +24,9 @@ const TopSwicher = () => {
             style={{
                 borderRadius: '1rem',
                 backgroundColor: theme.BACKGROUND_COLOR,
-                boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.25)',
+                marginBottom: '.5rem',
+                boxShadow:
+                    '-4px 6px 8px 4px rgba(0, 0, 0, 0.10), 3px 8px 16px 4px rgba(0, 0, 0, 0.10),  3px 8px 16px 4px rgba(0, 0, 0, 0.10)',
             }}
             container
             padding={2}
@@ -62,9 +64,13 @@ const TopSwicher = () => {
                     text={'Mobile + Home Discount'}
                     checked={expressHasFios}
                     value={expressHasFios}
-                    onChange={() =>
-                        dispatch(setExpressHasFios(!expressHasFios))
-                    }
+                    onChange={() => {
+                        if (expressHasFios) {
+                            dispatch(setExpressInternet());
+                        }
+
+                        dispatch(setExpressHasFios(!expressHasFios));
+                    }}
                 />
                 <AnimatePresence>
                     {expressHasFios && (
@@ -74,7 +80,7 @@ const TopSwicher = () => {
                             exit={{ opacity: 0 }}
                         >
                             <Switcher
-                                text={'Gigabit Fios Internet?'}
+                                text={'1 GIG Fios Internet?'}
                                 checked={expressInternet === 'gig'}
                                 value={
                                     expressInternet === 'gig' ? 'gig' : '200'
@@ -85,6 +91,22 @@ const TopSwicher = () => {
                                             expressInternet === 'gig'
                                                 ? '200'
                                                 : 'gig'
+                                        )
+                                    );
+                                }}
+                            />
+                            <Switcher
+                                text={'2 GIG Fios Internet?'}
+                                checked={expressInternet === '2gig'}
+                                value={
+                                    expressInternet === '2gig' ? 'gig' : '200'
+                                }
+                                onChange={() => {
+                                    dispatch(
+                                        setExpressInternet(
+                                            expressInternet === '2gig'
+                                                ? '200'
+                                                : '2gig'
                                         )
                                     );
                                 }}

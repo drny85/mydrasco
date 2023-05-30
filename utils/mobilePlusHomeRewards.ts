@@ -2,7 +2,7 @@ export const mobilePlusHomeRewards = (
     totalLines: number,
     hasFios: boolean,
     isWelcome: boolean,
-    internetSpeed: '200' | '400' | 'gig'
+    internetSpeed: '200' | '400' | 'gig' | '2gig'
 ) => {
     if (totalLines === 0 || !hasFios) return 0;
 

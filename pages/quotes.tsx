@@ -1,20 +1,20 @@
-import React, { useEffect } from 'react';
-import MainContainer from '../components/MainContainer';
-import {
-    Box,
-    Button,
-    List,
-    ListItem,
-    ListItemText,
-    Paper,
-} from '@mui/material';
-import { useAppDispatch, useAppSelector } from '../redux/hooks/reduxHooks';
-import Login from '.';
-import { Quote } from '../redux/quotesSlide';
-import { db } from '../firebase';
-import { useRouter } from 'next/router';
+import { Box, Button, List, ListItem } from '@mui/material';
 import moment from 'moment';
-import { setLinesData } from '../redux/wirelessSlide';
+import React, { useEffect } from 'react';
+import Login from '.';
+import MainContainer from '../components/MainContainer';
+import { db } from '../firebase';
+import { useAppDispatch, useAppSelector } from '../redux/hooks/reduxHooks';
+import { Quote } from '../redux/quotesSlide';
+import {
+    setExpressAutoPay,
+    setExpressFirstResponder,
+    setExpressHasFios,
+    setExpressInternet,
+    setLinesData,
+    setReviewModal,
+} from '../redux/wirelessSlide';
+import QuotesData from '../components/QuotesData';
 
 interface Props {
     onGoBack: () => void;
@@ -35,7 +35,13 @@ const Quotes = ({ onGoBack }: Props) => {
             console.log(error);
         }
     };
-    const goToQuote = (q: Quote) => {
+    const goToQuote = (quoteId: string) => {
+        const q = quotes.find((q) => q.id === quoteId);
+        if (!q) return;
+        dispatch(setExpressAutoPay(q.isAutoPay ? 10 : 0));
+        dispatch(setExpressFirstResponder(q.isFirstResponder));
+        dispatch(setExpressHasFios(q.hasFios));
+        dispatch(setExpressInternet(q.hasGig ? 'gig' : '200'));
         dispatch(setLinesData(q.lines));
         onGoBack();
     };
@@ -44,6 +50,31 @@ const Quotes = ({ onGoBack }: Props) => {
     useEffect(() => {
         loadQuotes();
     }, [user]);
+
+    if (!quotes.length)
+        return (
+            <MainContainer>
+                <div
+                    style={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'center',
+                        margin: '1rem auto',
+                        justifyContent: 'center',
+                        width: '100%',
+                    }}
+                >
+                    <h2
+                        style={{
+                            textAlign: 'center',
+                            marginBottom: '1rem',
+                        }}
+                    >
+                        No Quotes Saved
+                    </h2>
+                </div>
+            </MainContainer>
+        );
     return (
         <MainContainer>
             <div
@@ -83,44 +114,18 @@ const Quotes = ({ onGoBack }: Props) => {
                     </Box>
 
                     <Box width={'100%'}>
-                        <List
-                            sx={{
-                                width: '100%',
+                        <QuotesData
+                            onDelete={() => {}}
+                            onViewClick={(id) => goToQuote(id)}
+                            onSummaryView={() => {
+                                onGoBack();
+                                dispatch(setReviewModal('review'));
                             }}
-                        >
-                            {quotes.map((quote, index) => (
-                                <ListItem
-                                    onClick={() => goToQuote(quote)}
-                                    sx={{ cursor: 'pointer', margin: '1rem 0' }}
-                                    key={quote.id}
-                                >
-                                    <Box
-                                        display={'flex'}
-                                        width={'100%'}
-                                        px={3}
-                                        py={2}
-                                        borderRadius={1}
-                                        boxShadow={
-                                            '0px 0px 10px rgba(0,0,0,0.3)'
-                                        }
-                                        alignItems={'center'}
-                                        justifyContent={'space-between'}
-                                    >
-                                        <h3>
-                                            {index + 1} - {quote.customerName}
-                                        </h3>
-                                        <p>
-                                            {moment(quote.createdAt).format(
-                                                'lll'
-                                            )}
-                                        </p>
-                                    </Box>
-                                </ListItem>
-                            ))}
-                        </List>
+                        />
                     </Box>
                 </div>
             </div>
+            1
         </MainContainer>
     );
 };
