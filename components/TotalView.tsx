@@ -427,7 +427,11 @@ const TotalView = ({ lines, modalView = false, onViewQouteClick }: Props) => {
                     >
                         M + Home Lotalty Bonus Discount{' '}
                         <span
-                            style={{ fontSize: '0.8rem', color: theme.DANGER }}
+                            style={{
+                                fontSize: '0.8rem',
+                                color: theme.DANGER,
+                                fontWeight: 'bold',
+                            }}
                         >
                             ends (08/17/2023)
                         </span>
@@ -478,13 +482,13 @@ const TotalView = ({ lines, modalView = false, onViewQouteClick }: Props) => {
             >
                 <p
                     style={{
-                        fontSize: '1.7rem',
+                        fontSize: '1.9rem',
                         fontWeight: 'bold',
                     }}
                 >
                     Total
                 </p>
-                <p style={{ fontSize: '1.7rem', fontWeight: 'bold' }}>
+                <p style={{ fontSize: '1.9rem', fontWeight: 'bold' }}>
                     $
                     <AnimatedNumber
                         duration={300}

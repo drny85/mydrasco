@@ -15,6 +15,7 @@ import { Line } from '../redux/wirelessSlide';
 import { totalPerksCount } from '../utils/totalPerksCount';
 import PerksView, { Perk } from './PerksView';
 import Switcher from './Switcher';
+import { NON_PREMIUM_BYOD_VALUE, PREMIUM_BYOD_VALUE } from '../constant';
 
 const LineItem = ({
     line,
@@ -125,8 +126,9 @@ const LineItem = ({
                                             text={'BYOD'}
                                             savingText={
                                                 line.name === 'Unlimited Plus'
-                                                    ? '540'
-                                                    : '180'
+                                                    ? PREMIUM_BYOD_VALUE * 36
+                                                    : NON_PREMIUM_BYOD_VALUE *
+                                                      36
                                             }
                                             saving={line.byod}
                                             onChange={() =>

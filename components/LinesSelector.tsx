@@ -1,18 +1,16 @@
-import { Tooltip } from '@mui/material';
-import React, { useState } from 'react';
-import { useAppDispatch, useAppSelector } from '../redux/hooks/reduxHooks';
-import MyAlert from './MyAlert';
 import Add from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
+import { Tooltip } from '@mui/material';
 import AnimatedNumber from 'animated-number-react';
-import { Line, setLinesData, toogleShake } from '../redux/wirelessSlide';
-import { perks } from '../perks';
-import { v4 } from 'uuid';
+import { useState } from 'react';
 import { toast } from 'react-toastify';
+import { v4 } from 'uuid';
+import { perks } from '../perks';
+import { useAppDispatch, useAppSelector } from '../redux/hooks/reduxHooks';
+import { Line, setLinesData, toogleShake } from '../redux/wirelessSlide';
+import MyAlert from './MyAlert';
 
-type Props = {};
-
-const LinesSelector = (props: Props) => {
+const LinesSelector = () => {
     const dispatch = useAppDispatch();
     const user = useAppSelector((s) => s.auth.user);
     const [showAlert, setShowAlert] = useState(false);
