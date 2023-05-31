@@ -425,7 +425,7 @@ const TotalView = ({ lines, modalView = false, onViewQouteClick }: Props) => {
                             fontSize: '1.1rem',
                         }}
                     >
-                        M + Home Lotalty Bonus Discount{' '}
+                        M + Home Loyalty Bonus Discount{' '}
                         <span
                             style={{
                                 fontSize: '0.8rem',
