@@ -155,13 +155,9 @@ const Plans = () => {
         internet_plan: '200' | '400' | 'gig' | '2gig' | undefined,
         hasInternet: boolean
     ): number => {
-        if (
-            lines === 0 ||
-            expressInternet === undefined ||
-            !expressWhithin30Days
-        )
-            return 0;
-        return internet_plan === 'gig' && hasInternet
+        if (lines === 0 || !expressWhithin30Days) return 0;
+        return (internet_plan === 'gig' || internet_plan === '2gig') &&
+            hasInternet
             ? 10
             : internet_plan !== 'gig' &&
               hasInternet &&

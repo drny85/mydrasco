@@ -9,8 +9,10 @@ import {
     Tooltip,
 } from '@mui/material';
 import AnimatedNumber from 'animated-number-react';
+import moment from 'moment';
 import { useEffect } from 'react';
 import { toast } from 'react-toastify';
+import { BONUS_EXPIRATION_DATE } from '../constant';
 import { db } from '../firebase';
 import { useAppDispatch, useAppSelector } from '../redux/hooks/reduxHooks';
 import { Quote } from '../redux/quotesSlide';
@@ -71,6 +73,7 @@ const TotalView = ({ lines, modalView = false, onViewQouteClick }: Props) => {
     };
 
     const loyaltyBonusDiscount = (): number => {
+        if (moment().isAfter(BONUS_EXPIRATION_DATE)) return 0;
         return lines
             .map((line) =>
                 (line.name === 'Unlimited Welcome' ||
@@ -395,7 +398,7 @@ const TotalView = ({ lines, modalView = false, onViewQouteClick }: Props) => {
                             fontSize: '1.1rem',
                         }}
                     >
-                        Mobile + Home Discount
+                        Mobile + Home Discount{' '}
                     </p>
                     <p style={{ fontSize: '1.1rem' }}>
                         -$
@@ -422,7 +425,12 @@ const TotalView = ({ lines, modalView = false, onViewQouteClick }: Props) => {
                             fontSize: '1.1rem',
                         }}
                     >
-                        M + Home Lotalty Bonus Discount
+                        M + Home Lotalty Bonus Discount{' '}
+                        <span
+                            style={{ fontSize: '0.8rem', color: theme.DANGER }}
+                        >
+                            ends (08/17/2023)
+                        </span>
                     </p>
                     <p style={{ fontSize: '1.1rem' }}>
                         -$

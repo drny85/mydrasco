@@ -28,8 +28,8 @@ const MyPlanCard = ({
         <HoverElement selected={selected}>
             <Grid
                 onClick={onClick}
-                minWidth={380}
-                width={{ xs: '100%', sm: '100%', md: 400 }}
+                minWidth={400}
+                width={{ xs: '100%', sm: 500, md: 400 }}
                 bgcolor={theme.mode === 'light' ? '#212121' : '#ffffff'}
                 padding={2}
                 borderRadius={2}

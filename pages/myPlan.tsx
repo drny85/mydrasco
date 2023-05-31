@@ -1,4 +1,4 @@
-import { Box, Button, Container, Grid, Tooltip } from '@mui/material';
+import { Box, Button, Grid, Tooltip } from '@mui/material';
 import { AnimatePresence, motion } from 'framer-motion';
 import React, { useCallback, useEffect, useState } from 'react';
 
@@ -11,6 +11,7 @@ import { Perk } from '../components/PerksView';
 import { perks } from '../perks';
 import { Line, setGetStarted, setLinesData } from '../redux/wirelessSlide';
 
+import moment from 'moment';
 import Head from 'next/head';
 import AnimateElementIf from '../components/AnimateElementIf';
 import LineItem from '../components/LineItem';
@@ -19,7 +20,11 @@ import PopularPlans from '../components/PopularPlans';
 import TotalView from '../components/TotalView';
 import PerkAlertModal from '../components/modals/PerkAlertModal';
 import ReviewModal from '../components/modals/ReviewModal';
-import { NON_PREMIUM_BYOD_VALUE, PREMIUM_BYOD_VALUE } from '../constant';
+import {
+    BONUS_EXPIRATION_DATE,
+    NON_PREMIUM_BYOD_VALUE,
+    PREMIUM_BYOD_VALUE,
+} from '../constant';
 import { toogleHoverPlan } from '../redux/wirelessSlide';
 import Quotes from './quotes';
 
@@ -218,6 +223,7 @@ const MyPlan = () => {
         line: Line,
         internet: typeof expressInternet
     ): number => {
+        if (moment().isAfter(BONUS_EXPIRATION_DATE)) return 0;
         if (!expressHasFios || lines.length === 0) return 0;
         const gig = internet === 'gig' || internet === '2gig';
         if (line.name === 'Unlimited Plus') {
@@ -334,7 +340,7 @@ const MyPlan = () => {
                     backgroundColor: theme.BACKGROUND_COLOR,
                     margin: '1rem auto',
                     width: '100%',
-                    maxWidth: '880px',
+                    maxWidth: '1080px',
                     height: '100%',
                 }}
             >
@@ -349,35 +355,37 @@ const MyPlan = () => {
                     {!getStarted && (
                         <motion.div
                             style={{
-                                //height: '100vh',
-                                display: 'flex',
                                 justifyContent: 'center',
                                 alignItems: 'center',
-                                flexDirection: 'column',
                                 margin: '1rem auto',
                                 height: '100%',
-                                overflow: 'scroll',
                                 marginBottom: '20px',
                             }}
                             initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
+                            animate={{ opacity: 1, width: '100%' }}
                             exit={{ opacity: 0 }}
                             transition={{ duration: 0.5 }}
                         >
-                            <Container maxWidth={'md'}>
+                            <Box>
                                 {popularPlans && <PopularPlans />}
                                 {!popularPlans && !getStarted && (
                                     <Grid
-                                        gap={3}
+                                        gap={2}
                                         container
-                                        justifyContent={'center'}
                                         direction={{
                                             xs: 'column',
-
+                                            sm: 'row',
                                             md: 'row',
-                                            lg: 'row',
                                         }}
-                                        style={{ marginTop: '2rem' }}
+                                        width={'100%'}
+                                        justifyContent={'center'}
+                                        alignItems={'center'}
+                                        // direction={{
+                                        //     xs: 'column',
+                                        //     sm: 'row',
+                                        //     md: 'row',
+                                        //     lg: 'row',
+                                        // }}
                                     >
                                         <MyPlanCard
                                             selected={hoverPlan === 'plus'}
@@ -506,7 +514,7 @@ const MyPlan = () => {
                                         </Grid>
                                     </div>
                                 )}
-                            </Container>
+                            </Box>
                             <div
                                 style={{
                                     marginTop: '2rem',
