@@ -52,11 +52,12 @@ const TopSwicher = () => {
                     text={'First Responder Discount'}
                     checked={expressFirstResponder}
                     value={expressFirstResponder}
-                    onChange={() =>
+                    onChange={() => {
                         dispatch(
                             setExpressFirstResponder(!expressFirstResponder)
-                        )
-                    }
+                        );
+                        dispatch(setExpressHasFios(false));
+                    }}
                 />
             </Grid>
             <Grid item>
@@ -67,6 +68,9 @@ const TopSwicher = () => {
                     onChange={() => {
                         if (expressHasFios) {
                             dispatch(setExpressInternet());
+                        }
+                        if (expressFirstResponder) {
+                            dispatch(setExpressFirstResponder(false));
                         }
 
                         dispatch(setExpressHasFios(!expressHasFios));
