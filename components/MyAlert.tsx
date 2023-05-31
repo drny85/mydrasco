@@ -7,6 +7,8 @@ import {
     DialogTitle,
 } from '@mui/material';
 import React from 'react';
+import { useAppDispatch, useAppSelector } from '../redux/hooks/reduxHooks';
+import { toogleShake } from '../redux/wirelessSlide';
 
 type Props = {
     open: boolean;
@@ -16,6 +18,9 @@ type Props = {
 };
 
 function MyAlert({ open, title, message, onClick }: Props) {
+    const dispatch = useAppDispatch();
+    const shake = useAppSelector((state) => state.wireless.shake);
+
     return (
         <Dialog
             open={open}
@@ -30,7 +35,15 @@ function MyAlert({ open, title, message, onClick }: Props) {
                 </DialogContentText>
             </DialogContent>
             <DialogActions>
-                <Button onClick={() => onClick(false)} autoFocus>
+                <Button
+                    onClick={() => {
+                        onClick(false);
+                        if (shake) {
+                            dispatch(toogleShake());
+                        }
+                    }}
+                    autoFocus
+                >
                     Ok, Got it!
                 </Button>
             </DialogActions>

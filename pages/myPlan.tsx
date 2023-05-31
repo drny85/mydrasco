@@ -39,7 +39,7 @@ const MyPlan = () => {
     const [perkToAdd, setPerkToAdd] = useState<{ perK: Perk; line: Line }>();
 
     const lines = useAppSelector((state) => state.wireless.lines);
-    const quotes = useAppSelector((state) => state.wireless.quotes);
+
     const getStarted = useAppSelector((state) => state.wireless.getStarted);
 
     const {
@@ -340,7 +340,7 @@ const MyPlan = () => {
                     backgroundColor: theme.BACKGROUND_COLOR,
                     margin: '1rem auto',
                     width: '100%',
-                    maxWidth: '1080px',
+                    maxWidth: '900px',
                     height: '100%',
                 }}
             >

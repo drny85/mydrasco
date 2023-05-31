@@ -33,6 +33,7 @@ const LineItem = ({
 }) => {
     const theme = useAppSelector((state) => state.theme);
     const [expanded, setExpanded] = React.useState<string>('');
+    const shake = useAppSelector((s) => s.wireless.shake);
 
     return (
         <motion.div
@@ -168,12 +169,19 @@ const LineItem = ({
                     </AccordionDetails>
                 </Accordion>
                 <Tooltip title="Delete this line" arrow>
-                    <div
+                    <motion.div
+                        animate={{ scale: shake ? [1, 1.2, 1] : 1 }}
+                        initial={{ scale: 1 }}
+                        transition={{
+                            type: 'keyframes',
+                            duration: 0.5,
+                            repeat: 4,
+                        }}
                         onClick={() => onClick(line.id)}
                         style={{ marginLeft: '0.5rem', cursor: 'pointer' }}
                     >
                         <DeleteIcon sx={{ color: theme.DANGER }} />
-                    </div>
+                    </motion.div>
                 </Tooltip>
             </div>
         </motion.div>

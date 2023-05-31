@@ -5,7 +5,7 @@ import MyAlert from './MyAlert';
 import Add from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 import AnimatedNumber from 'animated-number-react';
-import { Line, setLinesData } from '../redux/wirelessSlide';
+import { Line, setLinesData, toogleShake } from '../redux/wirelessSlide';
 import { perks } from '../perks';
 import { v4 } from 'uuid';
 import { toast } from 'react-toastify';
@@ -14,11 +14,16 @@ type Props = {};
 
 const LinesSelector = (props: Props) => {
     const dispatch = useAppDispatch();
+    const user = useAppSelector((s) => s.auth.user);
     const [showAlert, setShowAlert] = useState(false);
     const [alertTitle, setAlertTitle] = useState('');
     const [alertMessage, setAlertMessage] = useState('');
     const theme = useAppSelector((s) => s.theme);
     const { lines, expressAutoPay } = useAppSelector((s) => s.wireless);
+
+    const name =
+        user?.email.split('.')[0].charAt(0).toUpperCase()! +
+            user?.email.split('.')[0].slice(1) || '';
 
     return (
         <div
@@ -34,8 +39,11 @@ const LinesSelector = (props: Props) => {
             <div
                 onClick={() => {
                     if (lines.length > 1) {
-                        setAlertMessage('Please remove individual line');
+                        setAlertMessage(
+                            `Hey ${name}, please remove individual line`
+                        );
                         setShowAlert(true);
+                        dispatch(toogleShake());
                     }
                 }}
             >

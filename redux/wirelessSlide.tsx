@@ -17,6 +17,7 @@ interface DataState {
     planView: 'myPlan' | 'oldPlan';
     getStarted: boolean;
     quotes: Quote[];
+    shake: boolean;
 }
 export interface Line {
     id: string;
@@ -39,6 +40,7 @@ const initialState: DataState = {
     getStarted: false,
     planView: 'myPlan',
     quotes: [],
+    shake: false,
 };
 const wirelessSlide = createSlice({
     name: 'wireless',
@@ -106,6 +108,9 @@ const wirelessSlide = createSlice({
         setQuotes: (state, { payload }: PayloadAction<Quote[]>) => {
             state.quotes = payload;
         },
+        toogleShake: (state) => {
+            state.shake = !state.shake;
+        },
     },
 });
 
@@ -123,6 +128,7 @@ export const {
     setGetStarted,
     toogleView,
     setQuotes,
+    toogleShake,
 } = wirelessSlide.actions;
 
 export default wirelessSlide.reducer;
