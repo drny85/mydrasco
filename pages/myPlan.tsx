@@ -644,16 +644,19 @@ const MyPlan = () => {
                                         <Grid item>
                                             <Tooltip
                                                 placement="top-start"
-                                                title="Switch All LInes to Unlimited Plus"
+                                                title="Switch All Lines to Unlimited Plus"
                                             >
                                                 <Button
+                                                    sx={{
+                                                        borderRadius: 20,
+                                                    }}
                                                     onClick={() =>
                                                         onSwitchAllLines(
                                                             'Unlimited Plus'
                                                         )
                                                     }
                                                     color="success"
-                                                    variant="text"
+                                                    variant="outlined"
                                                 >
                                                     Switch To Unlimited PLus
                                                 </Button>
@@ -662,16 +665,19 @@ const MyPlan = () => {
                                         <Grid item>
                                             <Tooltip
                                                 placement="top-end"
-                                                title="Switch All LInes to Unlimited Plus"
+                                                title="Switch All Lines to Unlimited Plus"
                                             >
                                                 <Button
+                                                    sx={{
+                                                        borderRadius: 20,
+                                                    }}
                                                     onClick={() =>
                                                         onSwitchAllLines(
                                                             'Unlimited Welcome'
                                                         )
                                                     }
-                                                    color="warning"
-                                                    variant="text"
+                                                    color="inherit"
+                                                    variant="outlined"
                                                 >
                                                     Switch To Unlimited Welcome
                                                 </Button>
