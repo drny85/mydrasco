@@ -5,9 +5,8 @@ export default [
         subtitle: '1 GIG 3.0',
         details: [
             'Click to Show / Hide All New Gigabit Plans',
-            'Xbox Series S Console',
-            'OR',
-            '$200 Home Depot Gift Card',
+            'NFL Sunday Ticket from YouTube OR',
+            'A Samsung Galaxy Chromebook Go on us.',
             'Starting at $89.99 with auto pay',
             '4 Yr Price Guarantee',
             'Router Rental with Whole-Home Wi-Fi included',
@@ -19,9 +18,7 @@ export default [
         subtitle: 'Plan Perks',
         details: [
             '3 Yr Price Guarantee',
-            'Xbox Elite Wireless Controller II',
-            'OR',
-            '$50 Home Depot Gift Card',
+            '$200 off a Samsung Galaxy Chromebook Go on us.',
             'Verizon Router Rental Included',
         ],
     },
@@ -31,9 +28,7 @@ export default [
         subtitle: 'Plan Perks',
         details: [
             '2 Yr Price Guarantee',
-            'Xbox Stereo Headset ',
-            'OR',
-            '$50 Home Depot Gift Card',
+            '$100 off a Samsung Galaxy Chromebook Go on us.',
             'Verizon Router Rental Included',
         ],
     },

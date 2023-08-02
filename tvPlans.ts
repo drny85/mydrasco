@@ -13,7 +13,7 @@ export default [
         price: 85.0,
         subtitle: `125+ channels. Choose 5 of your favorite channels and we'll recommend a package based on your preferences.`,
         perk: 'Plan Perks',
-        details: ['One set Top Box Included'],
+        details: ['One set Top Box Included', '$50 Verizon Gift Card'],
     },
     {
         id: 'more_fios_tv',
@@ -22,7 +22,11 @@ export default [
         subtitle: `300+ channels. Get our most popular channels plus regional sports.
     `,
         perk: 'Plan Perks',
-        details: ['One set Top Box Included', 'Basic DVR service included'],
+        details: [
+            'One set Top Box Included',
+            'Basic DVR service included',
+            '$50 Verizon Gift Card',
+        ],
     },
     {
         id: 'most_fios_tv',
