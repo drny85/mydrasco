@@ -433,7 +433,7 @@ const TotalView = ({ lines, modalView = false, onViewQouteClick }: Props) => {
                                 fontWeight: 'bold',
                             }}
                         >
-                            ends (08/17/2023)
+                            ends (12/31/2023)
                         </span>
                     </p>
                     <p style={{ fontSize: '1.1rem' }}>

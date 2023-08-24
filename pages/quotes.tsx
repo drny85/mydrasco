@@ -29,7 +29,10 @@ const Quotes = ({ onGoBack }: Props) => {
     const loadQuotes = async () => {
         try {
             const q = await db.collection('quotes').get();
-            const data = q.docs.map((doc) => ({ ...(doc.data() as Quote) }));
+            const data = q.docs.map((doc) => ({
+                ...(doc.data() as Quote),
+                id: doc.id,
+            }));
             setQuotes(data);
         } catch (error) {
             console.log(error);
@@ -114,7 +117,9 @@ const Quotes = ({ onGoBack }: Props) => {
 
                     <Box width={'100%'}>
                         <QuotesData
-                            onDelete={() => {}}
+                            onDelete={(id) => {
+                                alert(id);
+                            }}
                             onViewClick={(id) => goToQuote(id)}
                             onSummaryView={() => {
                                 onGoBack();
