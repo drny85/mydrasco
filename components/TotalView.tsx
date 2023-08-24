@@ -206,8 +206,7 @@ const TotalView = ({ lines, modalView = false, onViewQouteClick }: Props) => {
                 >
                     Note:{' '}
                     <span>
-                        First bill will include ${lines.length * 35} activation
-                        fee.
+                        ${lines.length * 35} activation fee will be waived
                     </span>
                 </p>
             </Box>
