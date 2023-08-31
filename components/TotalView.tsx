@@ -61,11 +61,11 @@ const TotalView = ({ lines, modalView = false, onViewQouteClick }: Props) => {
                 expressHasFios &&
                 (expressInternet === '2gig' || expressInternet === 'gig')
                     ? { discount: 10 }
-                    : line.name === 'Unlimited Plus' ||
-                      (line.name === 'Unlimited Ultimate' &&
-                          expressHasFios &&
-                          expressInternet !== '2gig' &&
-                          expressInternet !== 'gig')
+                    : (line.name === 'Unlimited Plus' ||
+                          line.name === 'Unlimited Ultimate') &&
+                      expressHasFios &&
+                      expressInternet !== '2gig' &&
+                      expressInternet !== 'gig'
                     ? { discount: 5 }
                     : line.name === 'Unlimited Welcome' && expressHasFios
                     ? { discount: 5 }
