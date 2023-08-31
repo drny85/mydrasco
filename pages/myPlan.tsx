@@ -442,10 +442,6 @@ const MyPlan = () => {
                                                 title="Connected Device Plan"
                                                 subtitle="Up to 50% off 2 watch, tablet, hotspot or Hum plans"
                                             />
-                                            <GridItem
-                                                title="Price Guarantee"
-                                                subtitle="-"
-                                            />
                                         </Grid>
                                     </div>
                                 )}
@@ -491,10 +487,6 @@ const MyPlan = () => {
                                                 title="Connected Device Plan"
                                                 subtitle="Up to 50% off"
                                             />
-                                            <GridItem
-                                                title="Price Guarantee"
-                                                subtitle="3 years"
-                                            />
                                         </Grid>
                                     </div>
                                 )}
@@ -537,10 +529,6 @@ const MyPlan = () => {
                                             />
                                             <GridItem
                                                 title="Connected Device Plan"
-                                                subtitle="-"
-                                            />
-                                            <GridItem
-                                                title="Price Guarantee"
                                                 subtitle="-"
                                             />
                                         </Grid>

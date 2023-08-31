@@ -162,6 +162,7 @@ const MyPlanCard = ({
                                 plan
                             </p>
                         </div>
+
                         <div
                             style={{
                                 display: 'flex',
@@ -169,7 +170,7 @@ const MyPlanCard = ({
                                 padding: '0.2rem  0.6rem',
                             }}
                         >
-                            <LockIcon
+                            <RouterIcon
                                 sx={{
                                     color:
                                         theme.mode === 'dark'
@@ -187,39 +188,71 @@ const MyPlanCard = ({
                                             : '#212121',
                                 }}
                             >
-                                3-year Price Guarantee
+                                Home Internet as low as $25/mo,serivice
+                                availability varies
                             </p>
                         </div>
                     </>
                 ) : title.toLowerCase().includes('welcome') ? (
-                    <div
-                        style={{
-                            display: 'flex',
-                            alignItems: 'center',
-                            padding: '0.2rem  0.6rem',
-                        }}
-                    >
-                        <CellTowerIcon
-                            sx={{
-                                color:
-                                    theme.mode === 'dark'
-                                        ? '#212121'
-                                        : '#ffffff',
-                            }}
-                        />
-                        <p
+                    <>
+                        <div
                             style={{
-                                fontSize: '0.8rem',
-                                paddingLeft: '0.5rem',
-                                color:
-                                    theme.mode === 'light'
-                                        ? '#ffffff'
-                                        : '#212121',
+                                display: 'flex',
+                                alignItems: 'center',
+                                padding: '0.2rem  0.6rem',
                             }}
                         >
-                            5G
-                        </p>
-                    </div>
+                            <CellTowerIcon
+                                sx={{
+                                    color:
+                                        theme.mode === 'dark'
+                                            ? '#212121'
+                                            : '#ffffff',
+                                }}
+                            />
+                            <p
+                                style={{
+                                    fontSize: '0.8rem',
+                                    paddingLeft: '0.5rem',
+                                    color:
+                                        theme.mode === 'light'
+                                            ? '#ffffff'
+                                            : '#212121',
+                                }}
+                            >
+                                5G
+                            </p>
+                        </div>
+                        <div
+                            style={{
+                                display: 'flex',
+                                alignItems: 'center',
+                                padding: '0.2rem  0.6rem',
+                            }}
+                        >
+                            <RouterIcon
+                                sx={{
+                                    color:
+                                        theme.mode === 'dark'
+                                            ? '#212121'
+                                            : '#ffffff',
+                                }}
+                            />
+                            <p
+                                style={{
+                                    fontSize: '0.8rem',
+                                    paddingLeft: '0.5rem',
+                                    color:
+                                        theme.mode === 'light'
+                                            ? '#ffffff'
+                                            : '#212121',
+                                }}
+                            >
+                                Home Internet as low as $40/mo,serivice
+                                availability varies
+                            </p>
+                        </div>
+                    </>
                 ) : (
                     <>
                         <div
