@@ -5,20 +5,18 @@ import {
     AccordionDetails,
     AccordionSummary,
     Box,
-    Button,
     Tooltip,
 } from '@mui/material';
 import { motion } from 'framer-motion';
 import React from 'react';
+import { NON_PREMIUM_BYOD_VALUE, PREMIUM_BYOD_VALUE } from '../constant';
 import { useAppSelector } from '../redux/hooks/reduxHooks';
 import { Line } from '../redux/wirelessSlide';
+import { PLAN } from '../types';
 import { totalPerksCount } from '../utils/totalPerksCount';
+import MenuSwitchPlan from './MenuItems';
 import PerksView, { Perk } from './PerksView';
 import Switcher from './Switcher';
-import { NON_PREMIUM_BYOD_VALUE, PREMIUM_BYOD_VALUE } from '../constant';
-import PlanSwitcherMenu from './PlanSwitcherMenu';
-import { PLAN } from '../types';
-import MenuSwitchPlan from './MenuItems';
 
 const LineItem = ({
     line,
