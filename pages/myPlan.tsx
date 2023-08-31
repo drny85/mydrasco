@@ -690,7 +690,7 @@ const MyPlan = () => {
                                                     color="warning"
                                                     variant="outlined"
                                                 >
-                                                    Switch Ultimate
+                                                    Switch To Ultimate
                                                 </Button>
                                             </Tooltip>
                                         </Grid>
