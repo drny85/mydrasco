@@ -11,3 +11,8 @@ export interface Theme {
     STATUS_BAR: string;
     ASCENT: string;
 }
+
+export type PLAN =
+    | 'Unlimited Welcome'
+    | 'Unlimited Plus'
+    | 'Unlimited Ultimate';

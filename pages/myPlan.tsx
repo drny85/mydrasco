@@ -3,7 +3,6 @@ import { AnimatePresence, motion } from 'framer-motion';
 import React, { useCallback, useEffect, useState } from 'react';
 
 import GridItem from '../components/GridItem';
-import MyPlanCard from '../components/MyPlanCard';
 import TopSwicher from '../components/TopSwitch';
 import { useAppDispatch, useAppSelector } from '../redux/hooks/reduxHooks';
 
@@ -14,6 +13,7 @@ import { Line, setGetStarted, setLinesData } from '../redux/wirelessSlide';
 import moment from 'moment';
 import Head from 'next/head';
 import AnimateElementIf from '../components/AnimateElementIf';
+import CardContainer from '../components/CardContainer';
 import LineItem from '../components/LineItem';
 import LinesSelector from '../components/LinesSelector';
 import PopularPlans from '../components/PopularPlans';
@@ -25,12 +25,13 @@ import {
     NON_PREMIUM_BYOD_VALUE,
     PREMIUM_BYOD_VALUE,
 } from '../constant';
-import { toogleHoverPlan } from '../redux/wirelessSlide';
+import { PLAN } from '../types';
 import Quotes from './quotes';
 
 const MyPlan = () => {
     const user = useAppSelector((s) => s.auth.user);
     const theme = useAppSelector((state) => state.theme);
+    const [unlimitedUltimate, setUnlimitedUltimate] = React.useState(100);
     const [unlimitedPlus, setUnlimitedPlus] = React.useState(90);
     const [unlimitedWelcome, setUnlimitedWelcome] = React.useState(75);
     const [viewQuotes, setViewQuotes] = React.useState(false);
@@ -139,23 +140,29 @@ const MyPlan = () => {
         dispatch(setLinesData(newLines));
     };
 
-    const onSwitchLine = (id: string) => {
+    const onSwitchLine = (id: string, name: PLAN) => {
+        const line = lines.find((line) => line.id === id)!;
+        const n = {
+            ...line,
+            name: name,
+        };
+        const perkChecked =
+            name === 'Unlimited Ultimate'
+                ? {
+                      ...n,
+                      perks: [
+                          ...perks.filter(
+                              (p) => p.name !== '3 TravelPass Days'
+                          ),
+                      ],
+                  }
+                : { ...n, perks: [...perks] };
         const newLines = lines.map((line) => {
-            const n = {
-                ...line,
-                name:
-                    line.name === 'Unlimited Plus'
-                        ? 'Unlimited Welcome'
-                        : ('Unlimited Plus' as typeof line.name),
-            };
             if (line.id === id) {
                 return {
-                    ...line,
+                    ...perkChecked,
                     price: calculatePrice(n),
-                    name:
-                        line.name === 'Unlimited Plus'
-                            ? 'Unlimited Welcome'
-                            : ('Unlimited Plus' as typeof line.name),
+                    name: name,
                 };
             }
             return line;
@@ -203,7 +210,8 @@ const MyPlan = () => {
     const mobilePlusHome = (line: Line): number => {
         if (
             (expressInternet === 'gig' || expressInternet === '2gig') &&
-            line.name === 'Unlimited Plus'
+            (line.name === 'Unlimited Plus' ||
+                line.name === 'Unlimited Ultimate')
         ) {
             return 10;
         } else if (
@@ -226,7 +234,10 @@ const MyPlan = () => {
         if (moment().isAfter(BONUS_EXPIRATION_DATE)) return 0;
         if (!expressHasFios || lines.length === 0) return 0;
         const gig = internet === 'gig' || internet === '2gig';
-        if (line.name === 'Unlimited Plus') {
+        if (
+            line.name === 'Unlimited Plus' ||
+            line.name === 'Unlimited Ultimate'
+        ) {
             if (gig) {
                 return lines.length === 1 ? 25 : lines.length === 2 ? 15 : 0;
             }
@@ -291,6 +302,25 @@ const MyPlan = () => {
                         calculateLoyaltyBonus(line, expressInternet) +
                         perksTotal(line)
                     );
+                case 'Unlimited Ultimate':
+                    return (
+                        (lines.length === 1
+                            ? 100
+                            : lines.length === 2
+                            ? 90
+                            : lines.length === 3
+                            ? 75
+                            : lines.length === 4
+                            ? 65
+                            : lines.length >= 5
+                            ? 62
+                            : 0) -
+                        expressAutoPay -
+                        mobilePlusHome(line) -
+                        (line.byod ? PREMIUM_BYOD_VALUE : 0) -
+                        calculateLoyaltyBonus(line, expressInternet) +
+                        perksTotal(line)
+                    );
                 default:
                     return 0;
             }
@@ -340,7 +370,7 @@ const MyPlan = () => {
                     backgroundColor: theme.BACKGROUND_COLOR,
                     margin: '1rem auto',
                     width: '100%',
-                    maxWidth: '900px',
+                    maxWidth: '1200px',
                     height: '100%',
                 }}
             >
@@ -369,53 +399,55 @@ const MyPlan = () => {
                             <Box>
                                 {popularPlans && <PopularPlans />}
                                 {!popularPlans && !getStarted && (
-                                    <Grid
-                                        gap={2}
-                                        container
-                                        direction={{
-                                            xs: 'column',
-                                            sm: 'row',
-                                            md: 'row',
-                                        }}
-                                        width={'100%'}
-                                        justifyContent={'center'}
-                                        alignItems={'center'}
-                                        // direction={{
-                                        //     xs: 'column',
-                                        //     sm: 'row',
-                                        //     md: 'row',
-                                        //     lg: 'row',
-                                        // }}
-                                    >
-                                        <MyPlanCard
-                                            selected={hoverPlan === 'plus'}
-                                            onClick={() =>
-                                                dispatch(
-                                                    toogleHoverPlan('plus')
-                                                )
-                                            }
-                                            title="Unlimited Plus"
-                                            price={
-                                                unlimitedPlus - expressAutoPay
-                                            }
-                                            description="Our reliable, fastest 5G, up to 10x faster than 4G LTE. No matter how much you use."
-                                        />
-
-                                        <MyPlanCard
-                                            selected={hoverPlan === 'welcome'}
-                                            onClick={() =>
-                                                dispatch(
-                                                    toogleHoverPlan('welcome')
-                                                )
-                                            }
-                                            title="Unlimited Welcome"
-                                            price={
-                                                unlimitedWelcome -
-                                                expressAutoPay
-                                            }
-                                            description="Our reliable, fast 5G."
-                                        />
-                                    </Grid>
+                                    <CardContainer />
+                                )}
+                                {hoverPlan === 'ultimate' && !popularPlans && (
+                                    <div>
+                                        <Grid
+                                            sx={{
+                                                width: '100%',
+                                                boxShadow:
+                                                    '0px 0px 5px 6px rgba(0, 0, 0, 0.25)',
+                                                borderRadius: '0.5rem',
+                                                marginTop: '1rem',
+                                            }}
+                                            container
+                                            bgcolor={theme.BACKGROUND_COLOR}
+                                        >
+                                            <GridItem
+                                                title="5G"
+                                                subtitle="5G Ultra Wideband"
+                                            />
+                                            <GridItem
+                                                title="Unlimited Premium Data"
+                                                subtitle="Included"
+                                            />
+                                            <GridItem
+                                                title="Mobile Hotspot"
+                                                subtitle="60 GB"
+                                            />
+                                            <GridItem
+                                                title="Home Internet"
+                                                subtitle="Starting at $25/mo"
+                                            />
+                                            <GridItem
+                                                title="Device Savings"
+                                                subtitle="Eligible"
+                                            />
+                                            <GridItem
+                                                title="Bring Your Own Device"
+                                                subtitle="Up to $540 promo credit"
+                                            />
+                                            <GridItem
+                                                title="Connected Device Plan"
+                                                subtitle="Up to 50% off 2 watch, tablet, hotspot or Hum plans"
+                                            />
+                                            <GridItem
+                                                title="Price Guarantee"
+                                                subtitle="-"
+                                            />
+                                        </Grid>
+                                    </div>
                                 )}
 
                                 {hoverPlan === 'plus' && !popularPlans && (
@@ -644,6 +676,27 @@ const MyPlan = () => {
                                         <Grid item>
                                             <Tooltip
                                                 placement="top-start"
+                                                title="Switch to Unlimited Ultimate"
+                                            >
+                                                <Button
+                                                    sx={{
+                                                        borderRadius: 20,
+                                                    }}
+                                                    onClick={() =>
+                                                        onSwitchAllLines(
+                                                            'Unlimited Ultimate'
+                                                        )
+                                                    }
+                                                    color="warning"
+                                                    variant="outlined"
+                                                >
+                                                    Switch Ultimate
+                                                </Button>
+                                            </Tooltip>
+                                        </Grid>
+                                        <Grid item>
+                                            <Tooltip
+                                                placement="top-start"
                                                 title="Switch All Lines to Unlimited Plus"
                                             >
                                                 <Button
@@ -658,7 +711,7 @@ const MyPlan = () => {
                                                     color="success"
                                                     variant="outlined"
                                                 >
-                                                    Switch To Unlimited PLus
+                                                    Switch To PLus
                                                 </Button>
                                             </Tooltip>
                                         </Grid>
@@ -679,7 +732,7 @@ const MyPlan = () => {
                                                     color="inherit"
                                                     variant="outlined"
                                                 >
-                                                    Switch To Unlimited Welcome
+                                                    Switch To Welcome
                                                 </Button>
                                             </Tooltip>
                                         </Grid>
@@ -691,7 +744,9 @@ const MyPlan = () => {
                                         <LineItem
                                             lineNumber={index + 1}
                                             onSwitchBYOD={onSwitchBYOD}
-                                            onSwitch={onSwitchLine}
+                                            onSwitch={(planId, plan) =>
+                                                onSwitchLine(planId, plan)
+                                            }
                                             onClick={deleteLine}
                                             onSelectPerk={(perk: Perk) =>
                                                 onSelectPerk(perk, line)

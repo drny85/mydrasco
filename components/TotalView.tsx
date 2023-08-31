@@ -56,14 +56,16 @@ const TotalView = ({ lines, modalView = false, onViewQouteClick }: Props) => {
     const mobilePlusHomeDiscount = (): number => {
         return lines
             .map((line) =>
-                line.name === 'Unlimited Plus' &&
+                (line.name === 'Unlimited Plus' ||
+                    line.name === 'Unlimited Ultimate') &&
                 expressHasFios &&
                 (expressInternet === '2gig' || expressInternet === 'gig')
                     ? { discount: 10 }
-                    : line.name === 'Unlimited Plus' &&
-                      expressHasFios &&
-                      expressInternet !== '2gig' &&
-                      expressInternet !== 'gig'
+                    : line.name === 'Unlimited Plus' ||
+                      (line.name === 'Unlimited Ultimate' &&
+                          expressHasFios &&
+                          expressInternet !== '2gig' &&
+                          expressInternet !== 'gig')
                     ? { discount: 5 }
                     : line.name === 'Unlimited Welcome' && expressHasFios
                     ? { discount: 5 }
@@ -186,7 +188,7 @@ const TotalView = ({ lines, modalView = false, onViewQouteClick }: Props) => {
             flexDirection={'column'}
             width={'100%'}
             alignItems={'center'}
-            maxWidth={'850px'}
+            maxWidth={'1200px'}
             padding={3}
             mx={'auto'}
             sx={{

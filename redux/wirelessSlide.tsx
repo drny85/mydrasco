@@ -11,7 +11,7 @@ interface DataState {
     expressWhithin30Days: boolean;
     expressInternet: '200' | '400' | 'gig' | '2gig' | undefined;
     BYOD: boolean;
-    hoverPlan: 'plus' | 'welcome' | undefined;
+    hoverPlan: 'plus' | 'welcome' | 'ultimate' | undefined;
     lines: Line[];
     reviewModal: 'review' | 'quote' | undefined;
     planView: 'myPlan' | 'oldPlan';
@@ -21,7 +21,7 @@ interface DataState {
 }
 export interface Line {
     id: string;
-    name: 'Unlimited Plus' | 'Unlimited Welcome';
+    name: 'Unlimited Plus' | 'Unlimited Welcome' | 'Unlimited Ultimate';
     price: number;
     byod: boolean;
     perks: Perk[];
@@ -86,7 +86,9 @@ const wirelessSlide = createSlice({
 
         toogleHoverPlan: (
             state,
-            { payload }: PayloadAction<'plus' | 'welcome' | undefined>
+            {
+                payload,
+            }: PayloadAction<'plus' | 'welcome' | 'ultimate' | undefined>
         ) => {
             state.hoverPlan = payload;
         },

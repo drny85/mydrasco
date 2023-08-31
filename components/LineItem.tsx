@@ -16,6 +16,9 @@ import { totalPerksCount } from '../utils/totalPerksCount';
 import PerksView, { Perk } from './PerksView';
 import Switcher from './Switcher';
 import { NON_PREMIUM_BYOD_VALUE, PREMIUM_BYOD_VALUE } from '../constant';
+import PlanSwitcherMenu from './PlanSwitcherMenu';
+import { PLAN } from '../types';
+import MenuSwitchPlan from './MenuItems';
 
 const LineItem = ({
     line,
@@ -28,7 +31,7 @@ const LineItem = ({
     line: Line;
     onClick: (lineId: string) => void;
     lineNumber: number;
-    onSwitch: (lineId: string) => void;
+    onSwitch: (planId: string, plan: PLAN) => void;
     onSwitchBYOD: (lineId: string) => void;
     onSelectPerk: (perk: Perk) => void;
 }) => {
@@ -101,22 +104,13 @@ const LineItem = ({
                                     </Box>
                                 </Tooltip>
 
-                                <Tooltip
-                                    title={`Switch this line to ${
-                                        line.name === 'Unlimited Welcome'
-                                            ? 'Unlimited Plus'
-                                            : 'Unlimited Welcome'
-                                    }`}
-                                >
-                                    <Button
-                                        onClick={() => onSwitch(line.id)}
-                                        sx={{ marginLeft: '0.5rem' }}
-                                        size="small"
-                                        variant="text"
-                                    >
-                                        Switch
-                                    </Button>
-                                </Tooltip>
+                                {/* <PlanSwitcherMenu
+                                    onClick={(plan) => onSwitch(line.id, plan)}
+                                /> */}
+                                <MenuSwitchPlan
+                                    onClick={(plan) => onSwitch(line.id, plan)}
+                                />
+
                                 <Tooltip
                                     title="Customer is bringing their own device"
                                     arrow
@@ -125,7 +119,10 @@ const LineItem = ({
                                         <Switcher
                                             text={'BYOD'}
                                             savingText={
-                                                line.name === 'Unlimited Plus'
+                                                line.name ===
+                                                    'Unlimited Plus' ||
+                                                line.name ===
+                                                    'Unlimited Ultimate'
                                                     ? PREMIUM_BYOD_VALUE * 36
                                                     : NON_PREMIUM_BYOD_VALUE *
                                                       36
