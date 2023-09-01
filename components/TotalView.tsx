@@ -79,7 +79,8 @@ const TotalView = ({ lines, modalView = false, onViewQouteClick }: Props) => {
         return lines
             .map((line) =>
                 (line.name === 'Unlimited Welcome' ||
-                    line.name === 'Unlimited Plus') &&
+                    line.name === 'Unlimited Plus' ||
+                    line.name === 'Unlimited Ultimate') &&
                 expressInternet !== '2gig' &&
                 expressInternet !== 'gig' &&
                 expressHasFios
@@ -93,7 +94,8 @@ const TotalView = ({ lines, modalView = false, onViewQouteClick }: Props) => {
                                   ? 5
                                   : 0,
                       }
-                    : line.name === 'Unlimited Plus' &&
+                    : (line.name === 'Unlimited Plus' ||
+                          line.name === 'Unlimited Ultimate') &&
                       (expressInternet === '2gig' ||
                           expressInternet === 'gig') &&
                       expressHasFios
