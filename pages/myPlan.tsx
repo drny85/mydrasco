@@ -399,46 +399,149 @@ const MyPlan = () => {
                                 )}
                                 {hoverPlan === 'ultimate' && !popularPlans && (
                                     <div>
-                                        <Grid
-                                            sx={{
-                                                width: '100%',
-                                                boxShadow:
-                                                    '0px 0px 5px 6px rgba(0, 0, 0, 0.25)',
-                                                borderRadius: '0.5rem',
-                                                marginTop: '1rem',
-                                            }}
-                                            container
-                                            bgcolor={theme.BACKGROUND_COLOR}
-                                        >
-                                            <GridItem
-                                                title="5G"
-                                                subtitle="5G Ultra Wideband"
-                                            />
-                                            <GridItem
-                                                title="Unlimited Premium Data"
-                                                subtitle="Included"
-                                            />
-                                            <GridItem
-                                                title="Mobile Hotspot"
-                                                subtitle="60 GB"
-                                            />
-                                            <GridItem
-                                                title="Home Internet"
-                                                subtitle="Starting at $25/mo"
-                                            />
-                                            <GridItem
-                                                title="Device Savings"
-                                                subtitle="Eligible"
-                                            />
-                                            <GridItem
-                                                title="Bring Your Own Device"
-                                                subtitle="Up to $540 promo credit"
-                                            />
-                                            <GridItem
-                                                title="Connected Device Plan"
-                                                subtitle="Up to 50% off 2 watch, tablet, hotspot or Hum plans"
-                                            />
-                                        </Grid>
+                                        <div>
+                                            <Grid
+                                                sx={{
+                                                    width: '100%',
+                                                    boxShadow:
+                                                        '0px 0px 5px 6px rgba(0, 0, 0, 0.25)',
+                                                    borderRadius: '0.5rem',
+                                                    marginTop: '1rem',
+                                                }}
+                                                container
+                                                bgcolor={theme.BACKGROUND_COLOR}
+                                            >
+                                                <GridItem
+                                                    title="5G"
+                                                    subtitle="5G Ultra Wideband"
+                                                />
+                                                <GridItem
+                                                    title="Unlimited Premium Data"
+                                                    subtitle="Included"
+                                                />
+                                                <GridItem
+                                                    title="Mobile Hotspot"
+                                                    subtitle="60 GB"
+                                                />
+                                                <GridItem
+                                                    title="Home Internet"
+                                                    subtitle="Starting at $25/mo"
+                                                />
+                                                <GridItem
+                                                    title="Device Savings"
+                                                    subtitle="Eligible"
+                                                />
+                                                <GridItem
+                                                    title="Bring Your Own Device"
+                                                    subtitle="Up to $540 promo credit"
+                                                />
+                                                <GridItem
+                                                    title="Connected Device Plan"
+                                                    subtitle="Up to 50% off 2 watch, tablet, hotspot or Hum plans"
+                                                />
+                                            </Grid>
+                                        </div>
+                                        <div>
+                                            <Grid
+                                                sx={{
+                                                    width: '100%',
+                                                    boxShadow:
+                                                        '0px 0px 5px 6px rgba(0, 0, 0, 0.25)',
+                                                    borderRadius: '0.5rem',
+                                                    marginTop: '1rem',
+                                                }}
+                                                container
+                                            >
+                                                <div
+                                                    style={{ padding: '1rem' }}
+                                                >
+                                                    <h3>
+                                                        International Calling
+                                                        from the U.S
+                                                    </h3>
+                                                    <ul
+                                                        style={{
+                                                            padding: '1rem',
+                                                        }}
+                                                    >
+                                                        <li>
+                                                            Global Choice -
+                                                            Choose one of 140
+                                                            countries and get up
+                                                            to 300 minutes to
+                                                            call that country
+                                                        </li>
+                                                        <li>
+                                                            Includes 1 Global
+                                                            choice country per
+                                                            month and ca be
+                                                            changed each month.
+                                                        </li>
+                                                        <li>
+                                                            Countrue cannot be
+                                                            changed mid-month.
+                                                        </li>
+                                                        <li>
+                                                            Additional Global
+                                                            Choice plans ara
+                                                            charged at $10 per
+                                                            country per line per
+                                                            month.
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <div
+                                                    style={{ padding: '1rem' }}
+                                                >
+                                                    <h3>
+                                                        High Speed international
+                                                        data, talk & text (while
+                                                        traveling abroad)
+                                                    </h3>
+                                                    <ul
+                                                        style={{
+                                                            padding: '1rem',
+                                                        }}
+                                                    >
+                                                        <li>
+                                                            Unlimited talk, text
+                                                            and data when
+                                                            traveling in 210+
+                                                            countries and
+                                                            destinations:
+                                                        </li>
+                                                        <li>
+                                                            *10 GB roaming High
+                                                            speed data/month
+                                                            then lowered speed
+                                                            (2G) for remainder
+                                                            of the month.
+                                                        </li>
+                                                        <li>
+                                                            Unlimited calls
+                                                            within the visited
+                                                            country and back to
+                                                            the U.S.
+                                                        </li>
+                                                        <li>
+                                                            Calls to third
+                                                            country are charged
+                                                            international long
+                                                            distance rates
+                                                        </li>
+                                                    </ul>
+                                                    <i>
+                                                        *10 GB roaming High
+                                                        speed are suitable for
+                                                        most customers. However,
+                                                        addiotinal 2GB Speed
+                                                        Boost can be purchaase
+                                                        for $10, as many speed
+                                                        boost as customer needs
+                                                    </i>
+                                                </div>
+                                            </Grid>
+                                        </div>
                                     </div>
                                 )}
 
