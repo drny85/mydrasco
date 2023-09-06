@@ -29,11 +29,7 @@ import { PLAN } from '../types';
 import Quotes from './quotes';
 
 const MyPlan = () => {
-    const user = useAppSelector((s) => s.auth.user);
     const theme = useAppSelector((state) => state.theme);
-    const [unlimitedUltimate, setUnlimitedUltimate] = React.useState(100);
-    const [unlimitedPlus, setUnlimitedPlus] = React.useState(90);
-    const [unlimitedWelcome, setUnlimitedWelcome] = React.useState(75);
     const [viewQuotes, setViewQuotes] = React.useState(false);
     const [popularPlans, setPopularPlans] = React.useState(false);
     const [showPerkAlertModal, setShowPerkAlertModal] = React.useState(false);
