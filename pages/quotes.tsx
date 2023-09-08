@@ -129,7 +129,6 @@ const Quotes = ({ onGoBack }: Props) => {
                     </Box>
                 </div>
             </div>
-            1
         </MainContainer>
     );
 };
