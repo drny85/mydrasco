@@ -5,8 +5,9 @@ export default [
         subtitle: '1 GIG 3.0',
         details: [
             'Click to Show / Hide All New Gigabit Plans',
-            'NFL Sunday Ticket from YouTube OR',
-            'A Samsung Galaxy Chromebook Go on us.',
+            '$200 Verizon Gift Card',
+            'OR',
+            'Apple HomePod ($299 value)',
             'Starting at $89.99 with auto pay',
             '4 Yr Price Guarantee',
             'Router Rental with Whole-Home Wi-Fi included',
@@ -18,7 +19,7 @@ export default [
         subtitle: 'Plan Perks',
         details: [
             '3 Yr Price Guarantee',
-            '$200 off a Samsung Galaxy Chromebook Go on us.',
+            '$50 Verizon Gift Card',
             'Verizon Router Rental Included',
         ],
     },
@@ -28,7 +29,7 @@ export default [
         subtitle: 'Plan Perks',
         details: [
             '2 Yr Price Guarantee',
-            '$100 off a Samsung Galaxy Chromebook Go on us.',
+            '$50 Verizon Gift Card',
             'Verizon Router Rental Included',
         ],
     },
