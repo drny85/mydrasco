@@ -108,11 +108,17 @@ function Login({}: Props) {
                     );
                     return;
                 }
+                const userRef = await db
+                    .collection('users')
+                    .doc(user.uid)
+                    .get();
+                const data = userRef.data();
                 const userData: AppUser = {
                     id: user.uid,
                     email: user.email!,
                     emailVerified: user.emailVerified,
                     lastLogin: new Date().toISOString(),
+                    ...data,
                 };
                 await createUser(userData);
                 dispatch(setUser(userData));
