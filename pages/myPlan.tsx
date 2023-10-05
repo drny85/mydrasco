@@ -20,13 +20,14 @@ import PopularPlans from '../components/PopularPlans';
 import TotalView from '../components/TotalView';
 import PerkAlertModal from '../components/modals/PerkAlertModal';
 import ReviewModal from '../components/modals/ReviewModal';
-import {
-    BONUS_EXPIRATION_DATE,
-    NON_PREMIUM_BYOD_VALUE,
-    PREMIUM_BYOD_VALUE,
-} from '../constant';
+
 import { PLAN } from '../types';
 import Quotes from './quotes';
+import {
+    PLUS_BYOD_VALUE,
+    ULTIMATE_BYOD_VALUE,
+    WELCOME_BYOD_VALUE,
+} from '../constant';
 
 const MyPlan = () => {
     const theme = useAppSelector((state) => state.theme);
@@ -227,7 +228,6 @@ const MyPlan = () => {
         line: Line,
         internet: typeof expressInternet
     ): number => {
-        if (moment().isAfter(BONUS_EXPIRATION_DATE)) return 0;
         if (!expressHasFios || lines.length === 0) return 0;
         const gig = internet === 'gig' || internet === '2gig';
         if (
@@ -275,7 +275,7 @@ const MyPlan = () => {
                             : 0) -
                         expressAutoPay -
                         mobilePlusHome(line) -
-                        (line.byod ? NON_PREMIUM_BYOD_VALUE : 0) -
+                        (line.byod ? WELCOME_BYOD_VALUE : 0) -
                         calculateLoyaltyBonus(line, expressInternet) +
                         perksTotal(line)
                     );
@@ -294,7 +294,7 @@ const MyPlan = () => {
                             : 0) -
                         expressAutoPay -
                         mobilePlusHome(line) -
-                        (line.byod ? PREMIUM_BYOD_VALUE : 0) -
+                        (line.byod ? PLUS_BYOD_VALUE : 0) -
                         calculateLoyaltyBonus(line, expressInternet) +
                         perksTotal(line)
                     );
@@ -313,7 +313,7 @@ const MyPlan = () => {
                             : 0) -
                         expressAutoPay -
                         mobilePlusHome(line) -
-                        (line.byod ? PREMIUM_BYOD_VALUE : 0) -
+                        (line.byod ? ULTIMATE_BYOD_VALUE : 0) -
                         calculateLoyaltyBonus(line, expressInternet) +
                         perksTotal(line)
                     );

@@ -9,7 +9,7 @@ import {
 } from '@mui/material';
 import { motion } from 'framer-motion';
 import React from 'react';
-import { NON_PREMIUM_BYOD_VALUE, PREMIUM_BYOD_VALUE } from '../constant';
+
 import { useAppSelector } from '../redux/hooks/reduxHooks';
 import { Line } from '../redux/wirelessSlide';
 import { PLAN } from '../types';
@@ -17,6 +17,11 @@ import { totalPerksCount } from '../utils/totalPerksCount';
 import MenuSwitchPlan from './MenuItems';
 import PerksView, { Perk } from './PerksView';
 import Switcher from './Switcher';
+import {
+    PLUS_BYOD_VALUE,
+    ULTIMATE_BYOD_VALUE,
+    WELCOME_BYOD_VALUE,
+} from '../constant';
 
 const LineItem = ({
     line,
@@ -117,13 +122,12 @@ const LineItem = ({
                                         <Switcher
                                             text={'BYOD'}
                                             savingText={
-                                                line.name ===
-                                                    'Unlimited Plus' ||
-                                                line.name ===
-                                                    'Unlimited Ultimate'
-                                                    ? PREMIUM_BYOD_VALUE * 36
-                                                    : NON_PREMIUM_BYOD_VALUE *
-                                                      36
+                                                line.name === 'Unlimited Plus'
+                                                    ? PLUS_BYOD_VALUE
+                                                    : line.name ===
+                                                      'Unlimited Ultimate'
+                                                    ? ULTIMATE_BYOD_VALUE
+                                                    : WELCOME_BYOD_VALUE
                                             }
                                             saving={line.byod}
                                             onChange={() =>

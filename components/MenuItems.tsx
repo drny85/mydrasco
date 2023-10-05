@@ -8,7 +8,6 @@ import {
     bindMenu,
 } from 'material-ui-popup-state/hooks';
 import { PLAN } from '../types';
-import { on } from 'events';
 
 type Props = {
     onClick: (plan: PLAN) => void;
