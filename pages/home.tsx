@@ -686,6 +686,7 @@ const Plans = () => {
                                 display: 'flex',
                                 flex: 1,
                                 borderRadius: '15px',
+
                                 backgroundColor: theme.CARD_BACKGROUND,
                                 overflow: 'hidden',
                                 marginBottom: '12px',

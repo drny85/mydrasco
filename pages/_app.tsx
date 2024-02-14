@@ -10,7 +10,17 @@ function MyApp({ Component, pageProps }: AppProps) {
         <Provider store={store}>
             <ThemeProviderComponent>
                 {/* @ts-ignore */}
-                <Component {...pageProps} />
+                <div
+                    style={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        maxWidth: '1200px',
+                        margin: '0 auto',
+                    }}
+                >
+                    <Component {...pageProps} />
+                </div>
+
                 <GlobalStyle />
             </ThemeProviderComponent>
         </Provider>

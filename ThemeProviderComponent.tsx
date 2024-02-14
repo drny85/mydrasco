@@ -11,9 +11,7 @@ const ThemeProviderComponent: FC<ReactNode> = ({ children }) => {
     useEffect(() => {
         const t = localStorage.getItem('theme');
         if (t !== null) {
-            dispatch(
-                switchTheme(JSON.parse(t) === 'dark' ? darkTheme : lightTheme)
-            );
+            dispatch(switchTheme(t === 'dark' ? darkTheme : lightTheme));
         }
     }, [dispatch]);
     return (

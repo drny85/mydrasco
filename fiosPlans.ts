@@ -5,9 +5,8 @@ export default [
         subtitle: '1 GIG 3.0',
         details: [
             'Click to Show / Hide All New Gigabit Plans',
-            '$200 Verizon Gift Card',
-            'OR',
-            'Apple HomePod ($299 value)',
+            '$200 Target Gift Card',
+
             'Starting at $89.99 with auto pay',
             '4 Yr Price Guarantee',
             'Router Rental with Whole-Home Wi-Fi included',
@@ -19,7 +18,7 @@ export default [
         subtitle: 'Plan Perks',
         details: [
             '3 Yr Price Guarantee',
-            '$50 Verizon Gift Card',
+            '$100 Target Gift Card',
             'Verizon Router Rental Included',
         ],
     },
@@ -29,7 +28,7 @@ export default [
         subtitle: 'Plan Perks',
         details: [
             '2 Yr Price Guarantee',
-            '$50 Verizon Gift Card',
+            '$50 Target Gift Card',
             'Verizon Router Rental Included',
         ],
     },

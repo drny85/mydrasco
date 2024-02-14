@@ -10,7 +10,6 @@ import { Perk } from '../components/PerksView';
 import { perks } from '../perks';
 import { Line, setGetStarted, setLinesData } from '../redux/wirelessSlide';
 
-import moment from 'moment';
 import Head from 'next/head';
 import AnimateElementIf from '../components/AnimateElementIf';
 import CardContainer from '../components/CardContainer';
@@ -21,13 +20,13 @@ import TotalView from '../components/TotalView';
 import PerkAlertModal from '../components/modals/PerkAlertModal';
 import ReviewModal from '../components/modals/ReviewModal';
 
-import { PLAN } from '../types';
-import Quotes from './quotes';
 import {
     PLUS_BYOD_VALUE,
     ULTIMATE_BYOD_VALUE,
     WELCOME_BYOD_VALUE,
 } from '../constant';
+import { PLAN } from '../types';
+import Quotes from './quotes';
 
 const MyPlan = () => {
     const theme = useAppSelector((state) => state.theme);
