@@ -200,6 +200,30 @@ const TotalView = ({ lines, modalView = false, onViewQouteClick }: Props) => {
             }}
             mt={2}
         >
+            <div
+                style={{
+                    padding: '0.5rem',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: '0.5rem',
+                }}
+            >
+                <p>Download the Drasco App for a better experience</p>
+                <a
+                    style={{
+                        padding: '10px 20px',
+                        background: 'lightblue',
+                        borderRadius: '1.5rem',
+                        fontWeight: 'bold',
+                    }}
+                    target="_blank"
+                    href="https://apps.apple.com/us/app/drasco/id6476824480"
+                >
+                    Download Now
+                </a>
+            </div>
             <Box>
                 <p
                     style={{
