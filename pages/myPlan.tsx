@@ -21,12 +21,14 @@ import PerkAlertModal from '../components/modals/PerkAlertModal';
 import ReviewModal from '../components/modals/ReviewModal';
 
 import {
+    BONUS_EXPIRATION_DATE,
     PLUS_BYOD_VALUE,
     ULTIMATE_BYOD_VALUE,
     WELCOME_BYOD_VALUE,
 } from '../constant';
 import { PLAN } from '../types';
 import Quotes from './quotes';
+import moment from 'moment';
 
 const MyPlan = () => {
     const theme = useAppSelector((state) => state.theme);
@@ -227,6 +229,7 @@ const MyPlan = () => {
         line: Line,
         internet: typeof expressInternet
     ): number => {
+        if (moment().isAfter(BONUS_EXPIRATION_DATE)) return 0;
         if (!expressHasFios || lines.length === 0) return 0;
         const gig = internet === 'gig' || internet === '2gig';
         if (

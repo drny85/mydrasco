@@ -124,6 +124,7 @@ const TotalView = ({ lines, modalView = false, onViewQouteClick }: Props) => {
             )
             .reduce((acc, line) => acc + line.discount, 0);
     };
+    console.log('LOTALTY', loyaltyBonusDiscount());
     const perksSavings = (): number => {
         return lines
             .map((line) =>
@@ -234,7 +235,8 @@ const TotalView = ({ lines, modalView = false, onViewQouteClick }: Props) => {
                 >
                     Note:{' '}
                     <span>
-                        ${lines.length * 35} activation fee will be waived
+                        ${lines.length * 35} activation fee will be included in
+                        the first bill
                     </span>
                 </p>
             </Box>
