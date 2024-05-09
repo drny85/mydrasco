@@ -56,7 +56,6 @@ const TopSwicher = () => {
                         dispatch(
                             setExpressFirstResponder(!expressFirstResponder)
                         );
-                        dispatch(setExpressHasFios(false));
                     }}
                 />
             </Grid>
@@ -68,9 +67,6 @@ const TopSwicher = () => {
                     onChange={() => {
                         if (expressHasFios) {
                             dispatch(setExpressInternet());
-                        }
-                        if (expressFirstResponder) {
-                            dispatch(setExpressFirstResponder(false));
                         }
 
                         dispatch(setExpressHasFios(!expressHasFios));
