@@ -18,6 +18,7 @@ interface DataState {
     getStarted: boolean;
     quotes: Quote[];
     shake: boolean;
+    isWelcomeQualified: boolean;
 }
 export interface Line {
     id: string;
@@ -41,11 +42,15 @@ const initialState: DataState = {
     planView: 'myPlan',
     quotes: [],
     shake: false,
+    isWelcomeQualified: false,
 };
 const wirelessSlide = createSlice({
     name: 'wireless',
     initialState,
     reducers: {
+        toggleIsWelcomeQualified: (state) => {
+            state.isWelcomeQualified = !state.isWelcomeQualified;
+        },
         setExpressAutoPay: (
             state,
             { payload }: PayloadAction<DataState['expressAutoPay']>
@@ -131,6 +136,7 @@ export const {
     toogleView,
     setQuotes,
     toogleShake,
+    toggleIsWelcomeQualified,
 } = wirelessSlide.actions;
 
 export default wirelessSlide.reducer;

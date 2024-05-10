@@ -24,12 +24,14 @@ import {
     setLinesData,
     setQuotes,
     setReviewModal,
+    toggleIsWelcomeQualified,
 } from '../redux/wirelessSlide';
 import { byodSavings } from '../utils/byodSavings';
 import { firstResponderDiscount } from '../utils/firstResponderDiscount';
 import { totalPerksCount } from '../utils/totalPerksCount';
 import AnimateElementIf from './AnimateElementIf';
 import { Perk } from './PerksView';
+import Switcher from './Switcher';
 
 type Props = {
     lines: Line[];
@@ -41,6 +43,11 @@ const TotalView = ({ lines, modalView = false, onViewQouteClick }: Props) => {
     const theme = useAppSelector((s) => s.theme);
     const user = useAppSelector((s) => s.auth.user);
     const quotes = useAppSelector((s) => s.wireless.quotes);
+    const isWelcome = useAppSelector((s) => s.wireless.isWelcomeQualified);
+    const welcomeTotal = lines.filter(
+        (l) => l.name === 'Unlimited Welcome'
+    ).length;
+    console.log('WELCOME', welcomeTotal);
 
     const dispatch = useAppDispatch();
 
@@ -124,7 +131,7 @@ const TotalView = ({ lines, modalView = false, onViewQouteClick }: Props) => {
             )
             .reduce((acc, line) => acc + line.discount, 0);
     };
-    console.log('LOTALTY', loyaltyBonusDiscount());
+
     const perksSavings = (): number => {
         return lines
             .map((line) =>
@@ -181,6 +188,20 @@ const TotalView = ({ lines, modalView = false, onViewQouteClick }: Props) => {
         }
     };
 
+    const welcomeOfferBonus = (): number => {
+        if (welcomeTotal === 0) return 0;
+        if (!isWelcome) return 0;
+        return welcomeTotal === 1
+            ? 10
+            : welcomeTotal === 2
+            ? 15
+            : welcomeTotal === 3
+            ? 20
+            : welcomeTotal === 0
+            ? 0
+            : 0;
+    };
+
     useEffect(() => {
         loadQuotes();
     }, [user, quotes.length]);
@@ -224,6 +245,14 @@ const TotalView = ({ lines, modalView = false, onViewQouteClick }: Props) => {
                 >
                     Download Now
                 </a>
+            </div>
+            <div>
+                <Switcher
+                    value={isWelcome}
+                    onChange={() => dispatch(toggleIsWelcomeQualified())}
+                    text={'Unlimited WelcomePromotion. (NY & MA)'}
+                    checked={isWelcome}
+                />
             </div>
             <Box>
                 <p
@@ -501,6 +530,34 @@ const TotalView = ({ lines, modalView = false, onViewQouteClick }: Props) => {
                     </p>
                 </Box>
             </AnimateElementIf>
+            <AnimateElementIf show={isWelcome && welcomeTotal > 0}>
+                <Box
+                    my={1}
+                    display={'flex'}
+                    justifyContent={'space-between'}
+                    alignItems={'center'}
+                    width={'100%'}
+                >
+                    <p
+                        style={{
+                            fontSize: '1.1rem',
+                        }}
+                    >
+                        Local Growth Pricing Offer{' '}
+                        <i style={{ fontSize: '0.8rem' }}>
+                            (expires (6/30/2024))
+                        </i>
+                    </p>
+                    <p style={{ fontSize: '1.1rem' }}>
+                        -$
+                        <AnimatedNumber
+                            duration={300}
+                            formatValue={(n: number) => n.toFixed(0)}
+                            value={welcomeOfferBonus()}
+                        />
+                    </p>
+                </Box>
+            </AnimateElementIf>
 
             <Box
                 my={1}
@@ -527,7 +584,8 @@ const TotalView = ({ lines, modalView = false, onViewQouteClick }: Props) => {
                             firstResponderDiscount(
                                 lines.length,
                                 expressFirstResponder
-                            )
+                            ) -
+                            welcomeOfferBonus()
                         }
                     />
                 </p>
