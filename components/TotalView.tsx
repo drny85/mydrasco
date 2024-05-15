@@ -530,7 +530,9 @@ const TotalView = ({ lines, modalView = false, onViewQouteClick }: Props) => {
                     </p>
                 </Box>
             </AnimateElementIf>
-            <AnimateElementIf show={isWelcome && welcomeTotal > 0}>
+            <AnimateElementIf
+                show={isWelcome && welcomeTotal > 0 && lines.length <= 3}
+            >
                 <Box
                     my={1}
                     display={'flex'}
