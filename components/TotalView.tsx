@@ -255,7 +255,7 @@ const TotalView = ({ lines, modalView = false, onViewQouteClick }: Props) => {
                         }
                         dispatch(toggleIsWelcomeQualified());
                     }}
-                    text={'Unlimited WelcomePromotion. (NY & MA)'}
+                    text={'Unlimited Welcome Promotion. (NY & MA)'}
                     checked={isWelcome}
                 />
             </div>

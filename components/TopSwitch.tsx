@@ -55,12 +55,30 @@ const TopSwicher = () => {
                     checked={expressFirstResponder}
                     value={expressFirstResponder}
                     onChange={() => {
-                        if (isWelcomeQualified && expressFirstResponder) {
-                            dispatch(toggleIsWelcomeQualified());
-                        } else {
+                        // if (isWelcomeQualified && expressFirstResponder) {
+                        //     dispatch(toggleIsWelcomeQualified());
+                        // } else if (
+                        //     isWelcomeQualified &&
+                        //     !expressFirstResponder
+                        // ) {
+                        //     dispatch(setExpressFirstResponder(true));
+                        //     dispatch(toggleIsWelcomeQualified());
+                        // } else {
+                        //     dispatch(
+                        //         setExpressFirstResponder(!expressFirstResponder)
+                        //     );
+                        // }
+                        if (!isWelcomeQualified) {
                             dispatch(
-                                setExpressFirstResponder(!expressFirstResponder)
+                                dispatch(
+                                    setExpressFirstResponder(
+                                        !expressFirstResponder
+                                    )
+                                )
                             );
+                        } else {
+                            dispatch(setExpressFirstResponder(false));
+                            alert('Must turn off Unlimited Welcome Promotion');
                         }
                     }}
                 />
