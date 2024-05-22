@@ -249,7 +249,12 @@ const TotalView = ({ lines, modalView = false, onViewQouteClick }: Props) => {
             <div>
                 <Switcher
                     value={isWelcome}
-                    onChange={() => dispatch(toggleIsWelcomeQualified())}
+                    onChange={() => {
+                        if (expressFirstResponder) {
+                            dispatch(setExpressFirstResponder(false));
+                        }
+                        dispatch(toggleIsWelcomeQualified());
+                    }}
                     text={'Unlimited WelcomePromotion. (NY & MA)'}
                     checked={isWelcome}
                 />

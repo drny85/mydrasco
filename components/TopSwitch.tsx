@@ -8,6 +8,7 @@ import {
     setExpressFirstResponder,
     setExpressHasFios,
     setExpressInternet,
+    toggleIsWelcomeQualified,
 } from '../redux/wirelessSlide';
 
 const TopSwicher = () => {
@@ -18,6 +19,7 @@ const TopSwicher = () => {
         expressHasFios,
         expressFirstResponder,
         expressInternet,
+        isWelcomeQualified,
     } = useAppSelector((state) => state.wireless);
     return (
         <Grid
@@ -53,9 +55,13 @@ const TopSwicher = () => {
                     checked={expressFirstResponder}
                     value={expressFirstResponder}
                     onChange={() => {
-                        dispatch(
-                            setExpressFirstResponder(!expressFirstResponder)
-                        );
+                        if (isWelcomeQualified && expressFirstResponder) {
+                            dispatch(toggleIsWelcomeQualified());
+                        } else {
+                            dispatch(
+                                setExpressFirstResponder(!expressFirstResponder)
+                            );
+                        }
                     }}
                 />
             </Grid>
