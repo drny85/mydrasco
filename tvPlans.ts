@@ -40,7 +40,7 @@ export default [
             '$200 Verizon Gift Card',
             'One set Top Box Included',
             'Multi-Room DVR service included',
-            'Showtime & Starz included',
+            'Paramount +  with Showtime & Starz',
             'NFL Red Zone HD',
         ],
     },

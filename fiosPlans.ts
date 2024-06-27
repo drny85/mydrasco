@@ -1,13 +1,24 @@
 export default [
     {
+        id: 'fios2Gig',
+        name: 'Up to 2.3 Gbps speeds',
+        subtitle: '2 GIG',
+        details: [
+            'Get Ray-Ban Meta smart glasses',
+            'Or',
+            'save $400 on Samsung home appliances',
+            '4 Yr Price Guarantee',
+            'Router Rental with Whole-Home Wi-Fi included',
+        ],
+    },
+    {
         id: 'fiosGig',
         name: 'Up to 940 / 880 Mbps',
-        subtitle: '1 GIG 3.0',
+        subtitle: '1 GIG',
         details: [
-            'Click to Show / Hide All New Gigabit Plans',
-            '$200 Target Gift Card',
-
-            'Starting at $89.99 with auto pay',
+            'Get Ray-Ban Meta smart glasses',
+            'Or',
+            'save $400 on Samsung home appliances',
             '4 Yr Price Guarantee',
             'Router Rental with Whole-Home Wi-Fi included',
         ],
@@ -16,20 +27,12 @@ export default [
         id: 'fios400',
         name: '500 / 500 Mbps',
         subtitle: 'Plan Perks',
-        details: [
-            '3 Yr Price Guarantee',
-            '$100 Target Gift Card',
-            'Verizon Router Rental Included',
-        ],
+        details: ['3 Yr Price Guarantee', 'Verizon Router Rental Included'],
     },
     {
         id: 'fios200',
         name: '300 / 300 Mbps',
         subtitle: 'Plan Perks',
-        details: [
-            '2 Yr Price Guarantee',
-            '$50 Target Gift Card',
-            'Verizon Router Rental Included',
-        ],
+        details: ['2 Yr Price Guarantee', 'Verizon Router Rental Included'],
     },
 ];

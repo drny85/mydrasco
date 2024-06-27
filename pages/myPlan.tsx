@@ -394,6 +394,17 @@ const MyPlan = () => {
                             exit={{ opacity: 0 }}
                             transition={{ duration: 0.5 }}
                         >
+                            <div>
+                                <h1
+                                    style={{
+                                        textAlign: 'center',
+                                        marginBottom: '16px',
+                                    }}
+                                >
+                                    This site is not being updated anymore,
+                                    please downlaod the Drasco App
+                                </h1>
+                            </div>
                             <Box>
                                 {popularPlans && <PopularPlans />}
                                 {!popularPlans && !getStarted && (
@@ -591,6 +602,7 @@ const MyPlan = () => {
                                         </Grid>
                                     </div>
                                 )}
+
                                 {hoverPlan === 'welcome' && !popularPlans && (
                                     <div>
                                         <Grid
@@ -693,6 +705,17 @@ const MyPlan = () => {
                             animate={{ opacity: 1 }}
                             exit={{ opacity: 0 }}
                         >
+                            <div>
+                                <h1
+                                    style={{
+                                        textAlign: 'center',
+                                        marginBottom: '16px',
+                                    }}
+                                >
+                                    This site is not being updated anymore,
+                                    please downlaod the Drasco App
+                                </h1>
+                            </div>
                             <Box mx={3}>
                                 <Button
                                     variant="text"

@@ -5,7 +5,7 @@ export const lightTheme: DefaultTheme = {
     BACKGROUND_COLOR: '#ffffff',
     TEXT_COLOR: '#212121',
     BUTTON_TEXT_COLOR: '#ffffff',
-    CARD_BACKGROUND: '#bcb8b1',
+    CARD_BACKGROUND: '#edede9',
     PRIMARY_BUTTON_COLOR: '#212121',
     SHADOW_COLOR: 'rgba(0, 0, 0, 0.19)',
     SECONDARY_BUTTON_COLOR: '#4361ee',

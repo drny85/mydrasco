@@ -19,14 +19,20 @@ const TvCard: FC<Props> = ({ title, details, price, id, subtitle, perk }) => {
     const theme = useAppSelector((state) => state.theme);
     return (
         <motion.div
-            style={{ display: 'flex', flex: 1 }}
+            style={{
+                display: 'flex',
+                flex: 1,
+                borderRadius: '1rem',
+                backgroundColor: theme.CARD_BACKGROUND,
+            }}
             whileHover={{ scale: 1.02 }}
         >
             <Card
                 style={{
-                    backgroundColor: theme.BACKGROUND_COLOR,
+                    backgroundColor: theme.CARD_BACKGROUND,
                     minWidth: '12rem',
                     width: '100%',
+                    borderRadius: '1rem',
                 }}
             >
                 <CardHeader

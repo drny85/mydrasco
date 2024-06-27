@@ -36,13 +36,7 @@ const FiosCard: FC<Props> = ({
 
     const firstResponderDiscount = () => {
         if (isFiosFirstResponder) {
-            if (
-                id === 'fiosGig' ||
-                id === 'streaming' ||
-                id === 'gaming' ||
-                id === 'complete'
-            )
-                return 15;
+            if (id === 'fiosGig' || id === 'fios2Gig') return 15;
             if (id === 'fios400') return 10;
             if (id === 'fios200') return 5;
         } else {
@@ -58,11 +52,11 @@ const FiosCard: FC<Props> = ({
         return 0;
     };
 
-    const mobilePlusHomeDiscount = () => {
-        if (hasWireless && isUnlimited) {
+    const mobilePlusHomeDiscount = (planId: string) => {
+        if (hasWireless && (planId === 'fiosGig' || planId === 'fios2Gig')) {
             return 25;
-        } else if (hasWireless && !isUnlimited) {
-            return 10;
+        } else if (hasWireless) {
+            return 15;
         } else {
             return 0;
         }
@@ -77,6 +71,7 @@ const FiosCard: FC<Props> = ({
                 backgroundColor: theme.CARD_BACKGROUND,
                 minWidth: '12rem',
                 width: '100%',
+                borderRadius: '1rem',
             }}
         >
             <CardHeader
@@ -95,84 +90,66 @@ const FiosCard: FC<Props> = ({
                     }}
                 >
                     <div>
-                        {(fiosAutoPay === 10 || hasWireless || acpCustomer) &&
-                            id !== 'fiosGig' && (
-                                <h3
-                                    style={{
-                                        textDecoration: 'line-through',
-                                        textDecorationThickness: 1,
-                                        color: '#964c43',
-                                    }}
-                                >
-                                    was ${price}
-                                </h3>
-                            )}
+                        {(fiosAutoPay === 10 || hasWireless || acpCustomer) && (
+                            <h3
+                                style={{
+                                    textDecoration: 'line-through',
+                                    textDecorationThickness: 1,
+                                    color: '#964c43',
+                                }}
+                            >
+                                was ${price}
+                            </h3>
+                        )}
 
                         <h1>
-                            {id !== 'fiosGig' && (
-                                <>
-                                    {fiosAutoPay === 10 && (
-                                        <i
-                                            style={{
-                                                fontSize: '18px',
-                                                paddingRight: '6px',
-                                            }}
-                                        >
-                                            now
-                                        </i>
-                                    )}
-                                    ${' '}
-                                    <AnimatedNumber
-                                        duration={300}
-                                        formatValue={(n: number) =>
-                                            n.toFixed(2)
-                                        }
-                                        value={
-                                            id === 'fios200' && acpCustomer
-                                                ? 0
-                                                : Math.fround(
-                                                      price -
-                                                          fiosAutoPay -
-                                                          mobilePlusHomeDiscount()! -
-                                                          firstResponderDiscount()! -
-                                                          acpDiscountTotal()
-                                                  ).toFixed(2)
-                                        }
-                                    />
-                                </>
-                            )}
+                            $
+                            <AnimatedNumber
+                                duration={300}
+                                formatValue={(n: number) => n.toFixed(2)}
+                                value={
+                                    id === 'fios200' && acpCustomer
+                                        ? 0
+                                        : Math.fround(
+                                              price -
+                                                  fiosAutoPay -
+                                                  mobilePlusHomeDiscount(id) -
+                                                  firstResponderDiscount()! -
+                                                  acpDiscountTotal()
+                                          ).toFixed(2)
+                                }
+                            />
                         </h1>
                     </div>
-                    {id !== 'fiosGig' && (
-                        <div
+
+                    <div
+                        style={{
+                            display: 'flex',
+                            flexDirection: 'column',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                        }}
+                    >
+                        <p
                             style={{
-                                display: 'flex',
-                                flexDirection: 'column',
-                                alignItems: 'center',
-                                justifyContent: 'center',
+                                paddingLeft: '8px',
+                                fontStyle: 'italic',
+                                fontSize: '13px',
                             }}
                         >
-                            <p
-                                style={{
-                                    paddingLeft: '8px',
-                                    fontStyle: 'italic',
-                                    fontSize: '13px',
-                                }}
-                            >
-                                / Per month
-                            </p>
-                            <p
-                                style={{
-                                    paddingLeft: '8px',
-                                    fontStyle: 'italic',
-                                    fontSize: '13px',
-                                }}
-                            >
-                                {' '}
-                                Plus taxes & fee
-                            </p>
-                        </div>
-                    )}
+                            / Per month
+                        </p>
+                        <p
+                            style={{
+                                paddingLeft: '8px',
+                                fontStyle: 'italic',
+                                fontSize: '13px',
+                            }}
+                        >
+                            {' '}
+                            Plus taxes & fee
+                        </p>
+                    </div>
                 </div>
                 <div>
                     <h4

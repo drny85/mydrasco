@@ -15,6 +15,7 @@ interface DataState {
         fios200: number;
         fios400: number;
         fiosGig: number;
+        fios2Gig: number;
     };
 }
 
@@ -31,8 +32,9 @@ const initialState: DataState = {
 
     fiosPrice: {
         fios200: 59.99,
-        fios400: 79.99,
+        fios400: 84.99,
         fiosGig: 99.99,
+        fios2Gig: 119.99,
     },
 };
 

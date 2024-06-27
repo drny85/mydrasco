@@ -95,12 +95,9 @@ const TabPanel: FC<Props> = ({ children, others, value, index }) => {
 const Plans = () => {
     const { loading } = useAuth();
     const { user } = useAppSelector((state) => state.auth);
-    const router = useRouter();
-
-    const name = user?.email.split('.')[0] || '';
 
     const [opacity, setOpacity] = useState(0);
-    const [opacityX, setOpacityX] = useState(0);
+
     const [tvAutoPay, setTvAutoPay] = useState(true);
 
     const [showAlert, setShowAlert] = useState(false);
@@ -135,20 +132,12 @@ const Plans = () => {
         expressWhithin30Days,
         expressBonus,
         BYOD,
-        planView,
     } = useAppSelector((state) => state.wireless);
     const theme = useAppSelector((state) => state.theme);
     const dispatch = useAppDispatch();
 
     const handleChange = (event: any, newValue: number) => {
         setValue(newValue);
-    };
-    const activationFee = (lines: number, amount: number = 35) => {
-        return lines * amount;
-    };
-
-    const autoPayDiscount = (lines: number, amount: number) => {
-        return lines * amount;
     };
 
     const newDiscountPerLine = (
@@ -551,12 +540,6 @@ const Plans = () => {
                         />
 
                         <Tab
-                            icon={<AddShoppingCartIcon />}
-                            iconPosition="start"
-                            label="OLD PLANS"
-                            sx={{ color: theme.TEXT_COLOR }}
-                        />
-                        <Tab
                             icon={<SignalCellularAltIcon />}
                             iconPosition="start"
                             label="My Plan"
@@ -564,7 +547,7 @@ const Plans = () => {
                         />
                     </Tabs>
                 </Box>
-                <TabPanel value={value} index={4}>
+                <TabPanel value={value} index={3}>
                     <MyPlan />
                 </TabPanel>
                 <TabPanel value={value} index={1}>
@@ -588,9 +571,10 @@ const Plans = () => {
                                 display: 'flex',
                                 alignItems: 'center',
                                 justifyContent: 'space-evenly',
+                                marginBottom: '10px',
                             }}
                         >
-                            <motion.div
+                            {/* <motion.div
                                 className="forms"
                                 style={{
                                     display: 'flex',
@@ -644,12 +628,11 @@ const Plans = () => {
                                 >
                                     ACP Form
                                 </motion.a>
-                            </motion.div>
+                            </motion.div> */}
 
                             <h2
                                 style={{
                                     textAlign: 'center',
-                                    marginBottom: '1rem',
                                 }}
                                 className="center"
                             >
@@ -705,11 +688,9 @@ const Plans = () => {
                                 <div
                                     style={{
                                         display: 'flex',
-                                        justifyContent: 'center',
-                                        alignItems: 'flex-end',
-                                        flexDirection: 'column',
-                                        paddingLeft: '12px',
-                                        paddingBottom: '8px',
+                                        justifyContent: 'space-evenly',
+                                        alignItems: 'center',
+                                        width: '100%',
                                     }}
                                 >
                                     <Switcher
@@ -732,14 +713,7 @@ const Plans = () => {
                                         acp={acpCustomer}
                                         value={isFiosFirstResponder}
                                         checked={isFiosFirstResponder}
-                                        text={
-                                            <div>
-                                                <p style={{ marginTop: '8px' }}>
-                                                    Is First Responder /
-                                                </p>
-                                                <p>For Those Who Serve</p>
-                                            </div>
-                                        }
+                                        text={'  Is First Responder'}
                                         onChange={() =>
                                             dispatch(
                                                 setFiosFirstResponder(
@@ -750,24 +724,6 @@ const Plans = () => {
                                         saving={isFiosFirstResponder}
                                         savingText={'Up to $15'}
                                     />
-                                </div>
-                            </div>
-                            <div
-                                style={{
-                                    flex: '1',
-                                    display: 'flex',
-                                    justifyContent: 'space-around',
-                                    alignItems: 'center',
-                                }}
-                            >
-                                <div
-                                    style={{
-                                        display: 'flex',
-                                        justifyContent: 'center',
-                                        alignItems: 'flex-end',
-                                        flexDirection: 'column',
-                                    }}
-                                >
                                     <Switcher
                                         value={hasWireless}
                                         text="Has Verizon Wireless?"
@@ -790,34 +746,6 @@ const Plans = () => {
                                             }
                                         }}
                                     />
-
-                                    {hasWireless && (
-                                        <div
-                                            style={{
-                                                display: 'flex',
-                                                alignItems: 'center',
-                                                justifyContent: 'space-between',
-                                                padding: '2px',
-                                                flexDirection: 'column',
-                                            }}
-                                        >
-                                            <Switcher
-                                                value={isUnlimited}
-                                                text="Premium Unlimited Plan?"
-                                                checked={isUnlimited}
-                                                onChange={() => {
-                                                    dispatch(
-                                                        setIsUnlimited(
-                                                            !isUnlimited
-                                                        )
-                                                    );
-                                                }}
-                                            />
-                                            <p style={{ fontStyle: 'italic' }}>
-                                                (Except 5G Start and Welcome)
-                                            </p>
-                                        </div>
-                                    )}
                                 </div>
                             </div>
                         </div>
@@ -826,6 +754,7 @@ const Plans = () => {
                                 display: 'flex',
                                 width: '100%',
                                 margin: '0 auto',
+                                gap: '16px',
                                 justifyContent: 'center',
                             }}
                         >
@@ -834,21 +763,22 @@ const Plans = () => {
                                     id={plan.id}
                                     subtitle={plan.subtitle}
                                     key={plan.id}
-                                    onClick={() => {
-                                        if (plan.id === 'fiosGig') {
-                                            setOpacityX((prev) =>
-                                                prev === 1 ? 0 : 1
-                                            );
-                                        }
-                                    }}
-                                    onMouseEnter={() => {
-                                        if (plan.id === 'fiosGig') {
-                                            setOpacityX(1);
-                                        }
-                                    }}
+                                    // onClick={() => {
+                                    //     if (plan.id === 'fiosGig') {
+                                    //         setOpacityX((prev) =>
+                                    //             prev === 1 ? 0 : 1
+                                    //         );
+                                    //     }
+                                    // }}
+                                    // onMouseEnter={() => {
+                                    //     if (plan.id === 'fiosGig') {
+                                    //         setOpacityX(1);
+                                    //     }
+                                    // }}
                                     price={
                                         fiosPrice[
                                             plan.id as
+                                                | 'fios2Gig'
                                                 | 'fiosGig'
                                                 | 'fios200'
                                                 | 'fios400'
@@ -859,13 +789,13 @@ const Plans = () => {
                                 />
                             ))}
                         </div>
-                        <Gigabit opacity={opacityX} />
 
                         <div
                             style={{
                                 transition: 'all 500ms ease-in-out',
                                 opacity: opacity,
                                 flexDirection: 'column',
+
                                 height: opacity === 1 ? 'auto' : '50px',
                                 transform: 'scale(' + opacity + ')',
                             }}
@@ -883,19 +813,27 @@ const Plans = () => {
                                     borderRadius: '0px 0px 25px 25px',
                                 }}
                             >
-                                <div>
-                                    <h3>Step 1</h3>
+                                <div
+                                    style={{
+                                        display: 'flex',
+                                        flexDirection: 'column',
+                                        alignItems: 'center',
+                                        width: '50rem',
+                                    }}
+                                >
                                     <p style={{ paddingTop: '10px' }}>
-                                        Verify your eligibility and apply for
-                                        the Affordable Connectivity Program
-                                        (ACP) acpbenefit.org/do-i-qualify/ (If
-                                        you're already approved, proceed to Step
-                                        2)
+                                        Verizon Forward provides qualifying
+                                        customers with Verizon Home Internet
+                                        services at a discounted price. If you
+                                        participate in certain Federal
+                                        Assistance programs such as SNAP, you
+                                        may qualify for the Verizon Forward
+                                        discount.
                                     </p>
                                     <div
                                         onClick={() =>
                                             window.open(
-                                                'https://acpbenefit.org/do-i-qualify/'
+                                                'https://www.verizon.com/discounts/verizon-forward/?cmp=KNC_H_P_COE_GAW_FiOS_99_99_BP-9122&abr=CMOGBRPLUS&c=A005126&kpid=go_cmp-15621458569_adg-162371263185_ad-700875548523_kwd-1603736523561_dev-c_ext-_prd-_sig-CjwKCAjwm_SzBhAsEiwAXE2Cv_TxmmZs3wvkhD24qHz2sBgGRDfol6EKrjqp_BYT_t96AVbHiA9InBoCPp0QAvD_BwE&utm_source=google&gad_source=1&gclid=CjwKCAjwm_SzBhAsEiwAXE2Cv_TxmmZs3wvkhD24qHz2sBgGRDfol6EKrjqp_BYT_t96AVbHiA9InBoCPp0QAvD_BwE'
                                             )
                                         }
                                         style={{
@@ -907,8 +845,8 @@ const Plans = () => {
                                             marginTop: '1.5rem',
                                             alignSelf: 'center',
                                             borderRadius: '35px',
-                                            width: '80%',
-                                            maxWidth: '9rem',
+                                            width: '20rem',
+                                            maxWidth: '15rem',
                                             cursor: 'pointer',
                                             boxShadow: '-3px 6px 6px #4b3a3a27',
                                         }}
@@ -919,34 +857,9 @@ const Plans = () => {
                                                 color: '#fff',
                                             }}
                                         >
-                                            Apply Now
+                                            Get Started
                                         </p>
                                     </div>
-                                </div>
-                                <div>
-                                    <h3>Step 2</h3>
-                                    <p
-                                        style={{
-                                            paddingTop: '10px',
-                                            textTransform: 'capitalize',
-                                        }}
-                                    >
-                                        Contact your Dedicated Verizon
-                                        Specialist to Order Fios Home Internet (
-                                        <i>
-                                            300 Mbps plan is free with ACP +
-                                            Fios Forward discount
-                                        </i>
-                                        )
-                                    </p>
-                                </div>
-                                <div>
-                                    <h3>Step 3</h3>
-                                    <p style={{ paddingTop: '10px' }}>
-                                        Call 1-800-VERIZON after installation
-                                        and say “Affordable Connectivity
-                                        Program” to receive your discount
-                                    </p>
                                 </div>
                             </div>
                             <div
@@ -1043,9 +956,7 @@ const Plans = () => {
                                                     color: '#ad4a4a',
                                                 }}
                                             >
-                                                <b>
-                                                    Mobile + Home Discount 2.0
-                                                </b>
+                                                <b>Mobile + Home 3.0, Up to</b>
                                             </p>
                                             <p
                                                 style={{
@@ -1085,7 +996,7 @@ const Plans = () => {
                             <h2
                                 style={{
                                     textAlign: 'center',
-                                    padding: '1.5rem',
+                                    padding: '1.3rem',
                                 }}
                             >
                                 Thank you for in interest in Fios TV
@@ -1097,13 +1008,15 @@ const Plans = () => {
                                 onChange={() => setTvAutoPay((prev) => !prev)}
                             />
                         </div>
-                        <hr />
+
                         <div
                             style={{
                                 display: 'flex',
+                                marginTop: '6px',
                                 width: '100%',
                                 margin: '0 auto',
                                 justifyContent: 'center',
+                                gap: '12px',
                             }}
                         >
                             {tvPlans.map((plan) => (
@@ -1118,25 +1031,7 @@ const Plans = () => {
                                 />
                             ))}
                         </div>
-                        <div
-                            style={{
-                                display: 'flex',
-                                margin: '1rem auto',
-                                alignSelf: 'center',
-                                alignItems: 'center',
-                                justifyContent: 'center',
-                            }}
-                        >
-                            <h3
-                                style={{
-                                    textAlign: 'center',
-                                    textTransform: 'uppercase',
-                                }}
-                            >
-                                {' '}
-                                Yes, Now with taxes
-                            </h3>
-                        </div>
+
                         <div
                             style={{
                                 display: 'flex',
@@ -1146,7 +1041,7 @@ const Plans = () => {
                                 flexDirection: 'column',
                             }}
                         >
-                            <h2>Fios Tv Plans</h2>
+                            <h2>Fios TV Plans</h2>
                             <p style={{ padding: '1rem', fontSize: '1.2rem' }}>
                                 Pick the package that works for you. And with no
                                 surcharges, broadcast, regional sports network
@@ -1181,865 +1076,6 @@ const Plans = () => {
                                 different one.
                             </p>
                         </div>
-                    </div>
-                </TabPanel>
-                <TabPanel index={3} value={value}>
-                    <div
-                        style={{
-                            display: 'flex',
-                            width: '100%',
-                            height: '100%',
-                            flexDirection: 'column',
-                        }}
-                    >
-                        <Head>
-                            <title>Express Store</title>
-                        </Head>
-
-                        <div
-                            style={{
-                                display: 'flex',
-                                justifyContent: 'space-evenly',
-                                padding: '1rem',
-                                width: '100%',
-                                boxShadow: '6px 6px 10px 3px rgba(0,0,0,0.121)',
-                                borderRadius: '15px',
-
-                                backgroundColor: theme.CARD_BACKGROUND,
-                            }}
-                        >
-                            <Switcher
-                                text="Auto Pay"
-                                value={expressAutoPay}
-                                checked={expressAutoPay === 10}
-                                saving={expressAutoPay === 10}
-                                savingText={expressAutoPay * lines}
-                                onChange={() => {
-                                    if (
-                                        expressAutoPay === 0 &&
-                                        !home5GAutoPay
-                                    ) {
-                                        dispatch(toogle5GAutoPay());
-                                    } else if (
-                                        expressAutoPay === 10 &&
-                                        home5GAutoPay
-                                    ) {
-                                        dispatch(toogle5GAutoPay());
-                                    }
-                                    dispatch(
-                                        setExpressAutoPay(
-                                            expressAutoPay === 0 ? 10 : 0
-                                        )
-                                    );
-                                }}
-                            />
-                            <Switcher
-                                text={
-                                    <div>
-                                        <p style={{ marginTop: '8px' }}>
-                                            Is First Responder /
-                                        </p>
-                                        <p>For Those Who Serve</p>
-                                    </div>
-                                }
-                                value={expressFirstResponder}
-                                checked={expressFirstResponder}
-                                saving={expressFirstResponder}
-                                savingText={firstResponderDiscount(
-                                    lines,
-                                    expressFirstResponder
-                                )}
-                                onChange={() => {
-                                    dispatch(
-                                        setExpressFirstResponder(
-                                            !expressFirstResponder
-                                        )
-                                    );
-                                }}
-                            />
-                            <div
-                                style={{
-                                    display: 'flex',
-                                    flexDirection: 'column',
-                                    alignItems: 'flex-start',
-                                    justifyContent: 'center',
-                                }}
-                            >
-                                <Switcher
-                                    text="BYOD"
-                                    value={BYOD}
-                                    checked={BYOD}
-                                    onChange={() => {
-                                        dispatch(toogleBYOD());
-                                    }}
-                                />
-                                <Switcher
-                                    text="Has Fios Internet"
-                                    value={expressHasFios}
-                                    checked={expressHasFios}
-                                    onChange={() => {
-                                        dispatch(
-                                            setExpressHasFios(!expressHasFios)
-                                        );
-                                        dispatch(setExpressInternet(undefined));
-                                    }}
-                                />
-                                {expressHasFios && (
-                                    <Switcher
-                                        value={expressWhithin30Days}
-                                        checked={expressWhithin30Days}
-                                        onChange={() =>
-                                            dispatch(
-                                                setExpressWithin30Days(
-                                                    !expressWhithin30Days
-                                                )
-                                            )
-                                        }
-                                        saving={
-                                            expressHasFios &&
-                                            expressInternet !== undefined
-                                        }
-                                        savingText={
-                                            lines *
-                                            (expressInternet === 'gig' ? 10 : 5)
-                                        }
-                                        text={`Signed up before ${moment().format(
-                                            'lll'
-                                        )}`}
-                                    />
-                                )}
-                            </div>
-
-                            {expressHasFios && (
-                                <motion.div
-                                    initial={{
-                                        opacity: 0,
-                                        translateX: -20,
-                                    }}
-                                    animate={{ opacity: 1, translateX: 0 }}
-                                >
-                                    <div
-                                        style={{
-                                            display: 'flex',
-                                            flexDirection: 'column',
-                                            alignItems: 'flex-end',
-                                            justifyContent: 'flex-end',
-                                        }}
-                                    >
-                                        <Switcher
-                                            value={'200'}
-                                            text="300 Mbps"
-                                            checked={expressInternet === '200'}
-                                            onChange={() =>
-                                                dispatch(
-                                                    setExpressInternet('200')
-                                                )
-                                            }
-                                        />
-                                        <Switcher
-                                            value={'400'}
-                                            text="500 Mbps"
-                                            checked={expressInternet === '400'}
-                                            onChange={() =>
-                                                dispatch(
-                                                    setExpressInternet('400')
-                                                )
-                                            }
-                                        />
-                                        <Switcher
-                                            value={'gig'}
-                                            text="1 GB"
-                                            checked={expressInternet === 'gig'}
-                                            onChange={() =>
-                                                dispatch(
-                                                    setExpressInternet('gig')
-                                                )
-                                            }
-                                        />
-                                    </div>
-                                </motion.div>
-                            )}
-                        </div>
-                        {/* WIRELESS LINES CONTAINER */}
-                        <div
-                            style={{
-                                display: 'flex',
-                                justifyContent: 'center',
-                                alignItems: 'center',
-                                backgroundColor: theme.SHADOW_COLOR,
-                                borderRadius: '15px',
-
-                                padding: '8px 0px',
-                            }}
-                        >
-                            <div
-                                style={{
-                                    display: 'flex',
-                                    width: '100%',
-                                    //flexDirection: 'column',
-                                    margin: '0 auto',
-
-                                    alignItems: 'center',
-                                    justifyContent: 'space-evenly',
-                                }}
-                            >
-                                <div
-                                    style={{
-                                        display: 'flex',
-                                        flexDirection: 'column',
-                                    }}
-                                >
-                                    <p
-                                        style={{
-                                            fontSize: '14px',
-                                            padding: '8px 0px',
-                                        }}
-                                    >
-                                        Have a phone you love? Get up to{' '}
-                                        <b>
-                                            {' '}
-                                            {allWelcome && lines > 0
-                                                ? '$180'
-                                                : allStart
-                                                ? '$360'
-                                                : someStart
-                                                ? '$360 or $504'
-                                                : '$504'}
-                                        </b>{' '}
-                                        BIC when you bring your phone.{' '}
-                                    </p>
-                                    <div>
-                                        <p style={{ fontSize: '14px' }}>
-                                            Bring your Tablet or Smart Watch and
-                                            get Verizon <b>$100</b> e-Gift Card
-                                        </p>
-                                        <div
-                                            onClick={() => {
-                                                window.open(
-                                                    'https://www.verizon.com/bring-your-own-device/'
-                                                );
-                                            }}
-                                            style={{
-                                                cursor: 'pointer',
-                                                color: theme.PRIMARY_BUTTON_COLOR,
-                                                display: 'flex',
-                                                opacity: 0.7,
-                                                padding: '1px 2rem',
-                                                textDecoration: 'underline',
-                                                textDecorationThickness: 2,
-                                                alignItems: 'center',
-                                                justifyContent: 'center',
-                                                marginTop: '10px',
-                                            }}
-                                        >
-                                            <p
-                                                style={{
-                                                    color: theme.PRIMARY_BUTTON_COLOR,
-                                                    fontWeight: 'bold',
-                                                }}
-                                            >
-                                                Learn More
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div
-                                    style={{
-                                        display: 'flex',
-                                        flexDirection: 'column',
-                                        justifyContent: 'flex-end',
-
-                                        // flexGrow: 1,
-                                        alignItems: 'center',
-                                    }}
-                                >
-                                    <h4
-                                        style={{
-                                            textTransform: 'capitalize',
-                                            fontWeight: 'bold',
-                                        }}
-                                    >
-                                        Free phones with a new line
-                                    </h4>
-                                    <Button
-                                        LinkComponent={'a'}
-                                        target="_blank"
-                                        href="https://www.verizon.com/shop/online/free-cell-phones/"
-                                    >
-                                        Click here
-                                    </Button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div
-                            style={{
-                                display: 'flex',
-                                justifyContent: 'center',
-                                alignItems: 'center',
-                                padding: '10px',
-                                boxShadow: '6px 6px 10px 3px rgba(0,0,0,0.121)',
-                                borderRadius: '35px',
-                                alignSelf: 'center',
-                                margin: '10px',
-                            }}
-                        >
-                            <h4>
-                                Number of Lines{' '}
-                                <b
-                                    style={{
-                                        fontSize: '1.2rem',
-                                        paddingLeft: '6px',
-                                    }}
-                                >
-                                    {lines}
-                                </b>{' '}
-                            </h4>
-                        </div>
-                        {moment().isBefore('06/16/2022') && (
-                            <p
-                                style={{
-                                    textTransform: 'uppercase',
-                                    fontSize: '1.2rem',
-                                    color: '#991e1e',
-                                    fontWeight: 'bold',
-                                    textAlign: 'center',
-                                    paddingBottom: '12px',
-                                }}
-                            >
-                                important: these pricing are taking effect on
-                                06/16/2022
-                            </p>
-                        )}
-                        <div
-                            style={{
-                                display: 'flex',
-                                padding: '1rem',
-                                backgroundColor: theme.CARD_BACKGROUND,
-                                borderRadius: '10px',
-                            }}
-                        >
-                            <div
-                                style={{
-                                    display: 'flex',
-                                    flexDirection: 'column',
-                                    width: '100%',
-                                }}
-                            >
-                                {plans.map((p) => (
-                                    <PlanLine
-                                        key={p.id}
-                                        price={lines === 0 ? 0 : p.price}
-                                        lines={p.line}
-                                        details={p.details}
-                                        onAdd={() => {
-                                            if (p.id !== 'welcome') {
-                                                if (welcome > 0) {
-                                                    setAlertTitle(
-                                                        `Sorry ${
-                                                            name
-                                                                .charAt(0)
-                                                                .toUpperCase() +
-                                                            name.slice(1)
-                                                        }!`
-                                                    );
-                                                    setAlertMessage(
-                                                        'Please remove all Welcome Unlimited if you want to add another plan'
-                                                    );
-                                                    setShowAlert(true);
-
-                                                    return;
-                                                }
-                                            } else if (p.id === 'welcome') {
-                                                if (
-                                                    Object.values(plans).some(
-                                                        (l) => {
-                                                            return (
-                                                                l.line > 0 &&
-                                                                l.id !==
-                                                                    'welcome'
-                                                            );
-                                                        }
-                                                    )
-                                                ) {
-                                                    setAlertTitle('Oppps!');
-                                                    setAlertMessage(
-                                                        'Please remove other plans if you want to add Welcome Unlimited'
-                                                    );
-                                                    setShowAlert(true);
-
-                                                    return;
-                                                }
-                                            }
-                                            if (p.id !== 'one_unlimited') {
-                                                if (oneUnlimited > 0) {
-                                                    setAlertTitle('Oppps!');
-                                                    setAlertMessage(
-                                                        'Please remove One Unlimited plan if you want to Mix & Match another plans'
-                                                    );
-                                                    setShowAlert(true);
-
-                                                    return;
-                                                }
-                                            } else {
-                                                if (
-                                                    Object.values(plans).some(
-                                                        (l) => {
-                                                            return (
-                                                                l.line > 0 &&
-                                                                l.id !==
-                                                                    'one_unlimited'
-                                                            );
-                                                        }
-                                                    )
-                                                ) {
-                                                    setAlertTitle('Oppps!');
-                                                    setAlertMessage(
-                                                        'Please remove other plans if you want to add One Unlimited for Iphone'
-                                                    );
-                                                    setShowAlert(true);
-
-                                                    return;
-                                                }
-                                            }
-                                            if (lines < 10) {
-                                                calculatePriceByLinePlus(
-                                                    p.id as PlanId
-                                                );
-                                            }
-                                        }}
-                                        onRemove={() => {
-                                            if (lines > 0) {
-                                                calculatePriceByLineMinus(
-                                                    p.id as PlanId
-                                                );
-                                            }
-                                        }}
-                                        planName={p.name}
-                                    />
-                                ))}
-                            </div>
-                        </div>
-                        {lines > 0 && (
-                            <motion.div
-                                initial={{ opacity: 0, translateY: -20 }}
-                                animate={{ opacity: 1, translateY: 0 }}
-                                exit={{ opacity: 0, translateY: -20 }}
-                                transition={{
-                                    type: 'tween',
-                                    ease: 'easeInOut',
-                                }}
-                            >
-                                <div
-                                    style={{
-                                        display: 'flex',
-                                        padding: '12px',
-                                        width: '100%',
-                                        alignItems: 'flex-end',
-                                        justifyContent: 'center',
-                                        flexDirection: 'column',
-                                        boxShadow:
-                                            '6px 6px 10px 3px rgba(0,0,0,0.121)',
-                                        borderRadius: '35px',
-                                        margin: '15px 0px',
-                                    }}
-                                >
-                                    <h4
-                                        style={{
-                                            textAlign: 'center',
-                                            padding: '5px 12px',
-                                            textDecoration: 'underline',
-                                        }}
-                                    >
-                                        Price Before Discount / No Auto Pay /
-                                        First Bill
-                                    </h4>
-                                    <div
-                                        style={{
-                                            display: 'flex',
-                                            flexDirection: 'column',
-                                            alignItems: 'flex-end',
-                                            padding: '12px',
-                                        }}
-                                    >
-                                        <p style={{ padding: '5px 0px' }}>
-                                            Sub Total:{' '}
-                                            <b>
-                                                ${' '}
-                                                <AnimatedNumber
-                                                    duration={300}
-                                                    formatValue={(n: number) =>
-                                                        n.toFixed(0)
-                                                    }
-                                                    value={
-                                                        calculateTotalPriceBeforeTaxes() +
-                                                        lines *
-                                                            (expressWhithin30Days &&
-                                                            expressInternet ===
-                                                                'gig'
-                                                                ? 10
-                                                                : expressWhithin30Days &&
-                                                                  expressInternet !==
-                                                                      'gig' &&
-                                                                  expressInternet !==
-                                                                      undefined
-                                                                ? 5
-                                                                : 0) +
-                                                        (expressAutoPay === 10
-                                                            ? lines * 10
-                                                            : 0)
-                                                    }
-                                                />
-                                            </b>
-                                        </p>
-                                        <p style={{ padding: '5px 0px' }}>
-                                            Activation Fee ({lines}{' '}
-                                            <i>
-                                                {lines > 1 ? 'lines' : 'line'}
-                                                ):{' '}
-                                            </i>
-                                            <b>
-                                                $
-                                                <AnimatedNumber
-                                                    duration={300}
-                                                    formatValue={(n: number) =>
-                                                        n.toFixed(0)
-                                                    }
-                                                    value={lines * 35}
-                                                />
-                                            </b>
-                                        </p>
-                                        <p
-                                            style={{
-                                                padding: '5px 0px',
-                                                fontSize: '1.3rem',
-                                                fontWeight: 'bold',
-                                            }}
-                                        >
-                                            Total before taxes:{' '}
-                                            <b>
-                                                $
-                                                <AnimatedNumber
-                                                    duration={300}
-                                                    formatValue={(n: number) =>
-                                                        n.toFixed(0)
-                                                    }
-                                                    value={
-                                                        calculateTotalPriceBeforeTaxes() +
-                                                        activationFee(lines) +
-                                                        autoPayDiscount(
-                                                            lines,
-                                                            expressAutoPay ===
-                                                                10
-                                                                ? 10
-                                                                : 0
-                                                        )
-                                                    }
-                                                />
-                                            </b>
-                                        </p>
-                                        <i>
-                                            Note: this price above does not
-                                            reflect any device payment
-                                            agreement. Auto pay discount might
-                                            not be applied within the first
-                                            month
-                                        </i>
-                                    </div>
-                                </div>
-                                <div
-                                    style={{
-                                        display: 'flex',
-                                        padding: '12px',
-                                        width: '100%',
-                                        flex: 1,
-                                        alignItems: 'flex-end',
-                                        justifyContent: 'space-between',
-                                        boxShadow:
-                                            '6px 6px 10px 3px rgba(0,0,0,0.121)',
-                                        borderRadius: '35px',
-                                    }}
-                                >
-                                    <div
-                                        onClick={() => {
-                                            resetAll();
-                                            dispatch(setExpressReset());
-                                        }}
-                                        style={{
-                                            display: 'flex',
-                                            justifyContent: 'center',
-                                            alignItems: 'center',
-                                            flexDirection: 'column',
-
-                                            height: '100%',
-                                            flex: 0.3,
-                                            marginBottom: '20px',
-                                            color: '#3d5bad',
-                                            fontWeight: 'bold',
-                                            cursor: 'pointer',
-                                        }}
-                                    >
-                                        Start Over
-                                    </div>
-                                    <div
-                                        style={{
-                                            flex: 0.7,
-                                            justifyContent: 'flex-end',
-                                        }}
-                                    >
-                                        <h4
-                                            style={{
-                                                textAlign: 'end',
-                                                padding: '5px 12px',
-                                                textDecoration: 'underline',
-                                            }}
-                                        >
-                                            Price after Discount / Second or
-                                            Third Bill
-                                        </h4>
-                                        <div
-                                            style={{
-                                                display: 'flex',
-                                                flexDirection: 'column',
-                                                alignItems: 'flex-end',
-                                                padding: '12px',
-                                            }}
-                                        >
-                                            <p
-                                                style={{
-                                                    padding: '5px 0px',
-                                                }}
-                                            >
-                                                Sub Total:{' '}
-                                                <span
-                                                    style={{
-                                                        fontStyle: 'italic',
-                                                    }}
-                                                >
-                                                    {' '}
-                                                </span>{' '}
-                                                <b>
-                                                    ${' '}
-                                                    <AnimatedNumber
-                                                        duration={300}
-                                                        formatValue={(
-                                                            n: number
-                                                        ) => n.toFixed(0)}
-                                                        value={
-                                                            calculateTotalPriceBeforeTaxes() +
-                                                            (expressAutoPay ===
-                                                            10
-                                                                ? 10 * lines
-                                                                : 0)
-                                                        }
-                                                    />
-                                                </b>{' '}
-                                            </p>
-                                            {expressAutoPay === 10 && (
-                                                <p
-                                                    style={{
-                                                        padding: '5px 0px',
-                                                    }}
-                                                >
-                                                    Auto Pay Discount ({lines}{' '}
-                                                    <i>
-                                                        {lines > 1
-                                                            ? 'lines'
-                                                            : 'line'}
-                                                        ):{' '}
-                                                    </i>
-                                                    <b
-                                                        style={{
-                                                            color: 'red',
-                                                        }}
-                                                    >
-                                                        -$
-                                                        {autoPayDiscount(
-                                                            lines,
-                                                            expressAutoPay ===
-                                                                10
-                                                                ? 10
-                                                                : 0
-                                                        )}
-                                                    </b>
-                                                </p>
-                                            )}
-                                            {expressFirstResponder && (
-                                                <p
-                                                    style={{
-                                                        padding: '5px 0px',
-                                                    }}
-                                                >
-                                                    First Responder Discount (
-                                                    {lines}{' '}
-                                                    {lines > 1
-                                                        ? 'lines'
-                                                        : 'line'}
-                                                    ):
-                                                    <b
-                                                        style={{
-                                                            color: 'red',
-                                                        }}
-                                                    >
-                                                        -$
-                                                        {firstResponderDiscount(
-                                                            lines,
-                                                            expressFirstResponder
-                                                        )}
-                                                    </b>
-                                                </p>
-                                            )}
-                                            {BYOD && (
-                                                <div
-                                                    style={{
-                                                        display: 'flex',
-                                                        alignItems: 'center',
-                                                    }}
-                                                >
-                                                    <p
-                                                        style={{
-                                                            padding: '5px 0px',
-                                                        }}
-                                                    >
-                                                        BYOD Credit{' '}
-                                                        <span
-                                                            style={{
-                                                                fontSize:
-                                                                    '0.8rem',
-                                                                fontStyle:
-                                                                    'italic',
-                                                                fontWeight:
-                                                                    'bold',
-                                                            }}
-                                                        >
-                                                            (36 months)
-                                                        </span>
-                                                        :
-                                                    </p>
-                                                    <b
-                                                        style={{
-                                                            color: 'red',
-                                                        }}
-                                                    >
-                                                        -$
-                                                        <AnimatedNumber
-                                                            className="byod"
-                                                            duration={300}
-                                                            formatValue={(
-                                                                n: number
-                                                            ) => n.toFixed(2)}
-                                                            value={byodDiscount()}
-                                                        />
-                                                    </b>
-                                                </div>
-                                            )}
-
-                                            {expressInternet &&
-                                                lines > 0 &&
-                                                expressInternet !==
-                                                    undefined && (
-                                                    <p
-                                                        style={{
-                                                            padding: '5px 0px',
-                                                        }}
-                                                    >
-                                                        Mobile + Home Discount
-                                                        2.0:
-                                                        <b
-                                                            style={{
-                                                                color: 'red',
-                                                            }}
-                                                        >
-                                                            -$
-                                                            {mobilePlusHomeRewards(
-                                                                lines,
-                                                                expressHasFios,
-                                                                welcome > 0,
-                                                                expressInternet!
-                                                            ) * lines}
-                                                        </b>
-                                                    </p>
-                                                )}
-
-                                            <p
-                                                style={{
-                                                    padding: '5px 0px',
-                                                    fontSize: '1.8rem',
-                                                    fontWeight: 'bold',
-                                                    textDecoration: 'underline',
-                                                    textDecorationStyle:
-                                                        'double',
-                                                }}
-                                            >
-                                                Total before taxes: ${' '}
-                                                <b>
-                                                    <AnimatedNumber
-                                                        duration={300}
-                                                        formatValue={(
-                                                            n: number
-                                                        ) => n.toFixed(2)}
-                                                        value={calculateGrandTotal(
-                                                            lines,
-                                                            expressFirstResponder
-                                                        )}
-                                                    />
-                                                </b>
-                                            </p>
-                                            <p
-                                                style={{
-                                                    fontStyle: 'italic',
-                                                    fontWeight: 'bold',
-                                                    fontSize: '1.6rem',
-                                                    padding: '8px',
-                                                    textAlign: 'right',
-                                                    color: theme.DANGER,
-                                                }}
-                                            >
-                                                Total Saving: $
-                                                <AnimatedNumber
-                                                    duration={300}
-                                                    formatValue={(n: number) =>
-                                                        n.toFixed(2)
-                                                    }
-                                                    value={
-                                                        autoPayDiscount(
-                                                            lines,
-                                                            expressAutoPay ===
-                                                                10
-                                                                ? 10
-                                                                : 0
-                                                        ) +
-                                                        firstResponderDiscount(
-                                                            lines,
-                                                            expressFirstResponder
-                                                        ) +
-                                                        mobilePlusHomeRewards(
-                                                            lines,
-                                                            expressHasFios,
-                                                            welcome > 0,
-                                                            expressInternet!
-                                                        ) *
-                                                            lines +
-                                                        bonusOfferDiscount(
-                                                            expressHasFios,
-                                                            expressBonus,
-                                                            numberOfLines
-                                                        )! +
-                                                        byodDiscount()
-                                                    }
-                                                />
-                                            </p>
-                                            <i>
-                                                Note: this price above does not
-                                                reflect any device payment
-                                                agreement.
-                                            </i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </motion.div>
-                        )}
                     </div>
                 </TabPanel>
             </div>
